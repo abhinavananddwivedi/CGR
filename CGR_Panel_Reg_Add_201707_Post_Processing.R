@@ -18,7 +18,7 @@ library(lubridate)
 
 ###
 
-## Parse LHS and RHS data tidily ###########################################
+### Parse LHS and RHS data tidily ###########################################
 
 file_script <- "CGR_Panel_Reg_Add_201707_Tidyread.R" # Read tidily
 #file_path_script <- paste0(folder, "/", file_script)

@@ -14,8 +14,8 @@ library(lmtest)
 ### Directory Management ###################################################
 
 # folder <- "July_2017"
-# subfolder <- "Data_July_2017"
-# file_path <- paste0(folder, "/", subfolder, "/")
+ folder <- "Data_July_2017"
+ file_path <- paste0(folder, "/")
 
 ###
 
@@ -27,15 +27,14 @@ Year_LHS = c(1984:2016)
 ## Equity ##################################################################
 
 file_LHS_equity <- "LHS_CGR_panel_equity.csv"
-#file_path_LHS_equity <- paste0(file_path, file_LHS_equity)
+file_path_LHS_equity <- paste0(file_path, file_LHS_equity)
 
 # LHS_equity <- readr::read_csv(file_path_LHS_equity,
 #                               na = c("", "NA")
 #                               )
 
-LHS_equity <- readr::read_csv(file_LHS_equity,
-                              na = c("", "NA")
-)
+LHS_equity <- readr::read_csv(file_path_LHS_equity,
+                              na = c("", "NA"))
 
 LHS_equity <- LHS_equity %>%
   dplyr::select(-c(AVERAGE,
