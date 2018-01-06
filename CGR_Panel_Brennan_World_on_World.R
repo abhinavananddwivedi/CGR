@@ -12,16 +12,16 @@ library(sandwich)
 
 ### Directory Management #########################################################
 
-folder <- "July_2017"
-subfolder <- "Data_July_2017"
-file_path <- paste0(folder, "/", subfolder, "/")
+#folder <- "July_2017"
+#folder <- "Data_July_2017"
+#file_path <- paste0(folder, "/")
 
 ##################################################################################
 
 ## Parse and post process LHS and RHS data tidily ################################
 
-file_script_process <- "CGR_Panel_Reg_Add_201707_Post_Processing.R" # Post Process
-file_path_script_process <- paste0(folder, "/", file_script_process)
+file_path_script_process <- "CGR_Panel_Reg_Add_201707_Post_Processing.R" # Post Process
+#file_path_script_process <- paste0(folder, "/", file_script_process)
 
 # Run the prior postprocessing file, note that it in turn sources the 
 # script file that tidily reads and parses the data
