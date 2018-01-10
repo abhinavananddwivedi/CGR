@@ -105,14 +105,19 @@ RHS_dev_indi <- readr::read_csv(file_path_dev,
                                 na = c("", "NA")
                                 ) %>%
   dplyr::rename(Country = `Country Name`) %>%
-  dplyr::rename(Life_Exp = `Life expectancy at birth total (years)`)
+  dplyr::rename(Life_Exp = `Life expectancy at birth total (years)`) %>%
+  dplyr::rename(Internet_Usage = `Internet users (per 100 people)`)
 
 # Extract life expectancy at birth
 
 RHS_life_exp <- RHS_dev_indi %>%
   dplyr::select(Country, Year, Life_Exp)
 
+# Extract Internet usage for each country
 
+RHS_internet_idio <- RHS_dev_indi %>%
+  dplyr::select(Country, Year, Internet_Usage)
+  
 # Extract the first principal component from the developmental indicators
 
 temp_name <- RHS_dev_indi %>%

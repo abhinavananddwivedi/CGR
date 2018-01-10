@@ -129,6 +129,9 @@ RHS_idio_new_2 <- dplyr::full_join(RHS_fin_risk,
                    ) %>%
   dplyr::full_join(., RHS_life_exp,
                    by = c("Country", "Year")
+                   ) %>%
+  dplyr::full_join(., RHS_internet_idio,
+                   by = c("Country", "Year")
                    )
 
 RHS_idio_new_3 <- dplyr::full_join(RHS_eq_liq, 
