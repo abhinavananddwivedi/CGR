@@ -738,3 +738,672 @@ R-Squared:      0.6084
 Adj. R-Squared: 0.53647
 F-statistic: 25.3755 on 6 and 98 DF, p-value: < 2.22e-16
 ##
+##############################################################################################
+
+### Balanced Panel estimation with country level Developmental PC1 among explanatory variables
+
+## Equities
+
+# Full
+Bal_Equity_devpc
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 26, T = 15, N = 390
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-44.5768  -8.8802  -1.6857   7.4612  48.4578 
+
+Coefficients:
+         Estimate Std. Error t value  Pr(>|t|)    
+TED      -8.46715    3.66289 -2.3116   0.02137 *  
+VIX       0.16593    0.16394  1.0122   0.31213    
+SENT      2.92599    1.14041  2.5657   0.01070 *  
+FEDFUNDS -0.27210    0.65628 -0.4146   0.67868    
+Euro     -7.76919    3.86252 -2.0114   0.04503 *  
+Dev_PC1  -8.19922    1.34826 -6.0813 3.059e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    141220
+Residual Sum of Squares: 72208
+R-Squared:      0.48869
+Adj. R-Squared: 0.44441
+F-statistic: 57.0263 on 6 and 358 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_Equity_devpc_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 26, T = 8, N = 208
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-40.66618  -6.88522   0.61198   7.61107  35.97022 
+
+Coefficients:
+         Estimate Std. Error t value  Pr(>|t|)    
+TED      10.73492    7.47423  1.4363   0.15269    
+VIX      -1.66754    0.29674 -5.6195 7.324e-08 ***
+SENT      4.05686    2.56005  1.5847   0.11482    
+FEDFUNDS -3.17461    2.06250 -1.5392   0.12554    
+Dev_PC1  -5.27346    2.67161 -1.9739   0.04995 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    41233
+Residual Sum of Squares: 31442
+R-Squared:      0.23746
+Adj. R-Squared: 0.10822
+F-statistic: 11.0239 on 5 and 177 DF, p-value: 2.9691e-09
+# Post 2000
+Bal_Equity_devpc_Post
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 26, T = 7, N = 182
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-27.07366  -5.53427  -0.36018   5.22057  28.56100 
+
+Coefficients:
+         Estimate Std. Error t value Pr(>|t|)  
+TED      -53.5516    26.7889 -1.9990  0.04741 *
+VIX        2.6477     1.4094  1.8786  0.06224 .
+SENT     -49.3518    39.7366 -1.2420  0.21619  
+FEDFUNDS   5.8348     3.9990  1.4591  0.14664  
+Euro     -32.6304    12.5390 -2.6023  0.01019 *
+Dev_PC1   -3.1059     1.6338 -1.9010  0.05922 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    20410
+Residual Sum of Squares: 12938
+R-Squared:      0.36608
+Adj. R-Squared: 0.23507
+F-statistic: 14.4373 on 6 and 150 DF, p-value: 5.8299e-13
+# Developed Countries
+Bal_Equity_devpc_Dev
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 19, T = 15, N = 285
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-48.1792  -9.3332  -1.2364   8.1500  45.5828 
+
+Coefficients:
+         Estimate Std. Error t value  Pr(>|t|)    
+TED      -8.93375    4.31528 -2.0703  0.039415 *  
+VIX       0.14170    0.19449  0.7286  0.466929    
+SENT      3.94338    1.41991  2.7772  0.005882 ** 
+FEDFUNDS -0.24634    0.71261 -0.3457  0.729859    
+Euro     -7.12065    4.21115 -1.6909  0.092053 .  
+Dev_PC1  -9.46243    1.34982 -7.0102 2.046e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    126200
+Residual Sum of Squares: 54811
+R-Squared:      0.5657
+Adj. R-Squared: 0.52561
+F-statistic: 56.4437 on 6 and 260 DF, p-value: < 2.22e-16
+# Emerging Countries
+Bal_Equity_devpc_Emerg
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 4, T = 15, N = 60
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-21.74570  -7.44826  -0.79063   5.34830  34.47905 
+
+Coefficients:
+          Estimate Std. Error t value  Pr(>|t|)    
+TED      -20.74933    4.10510 -5.0545 6.156e-06 ***
+VIX        0.65775    0.19462  3.3796  0.001415 ** 
+SENT       0.47356    1.56593  0.3024  0.763593    
+FEDFUNDS   0.12393    1.84807  0.0671  0.946801    
+Euro     -19.74619    3.61199 -5.4668 1.456e-06 ***
+Dev_PC1   -2.46538    3.59169 -0.6864  0.495624    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    13452
+Residual Sum of Squares: 7924.2
+R-Squared:      0.41091
+Adj. R-Squared: 0.30488
+F-statistic: 5.81287 on 6 and 50 DF, p-value: 0.00011885
+# Frontier Countries
+# Not Available
+
+## 
+
+## Bonds
+
+# Full
+Bal_Bond_devpc
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 15, T = 15, N = 225
+
+Residuals:
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-26.640386  -5.114729  -0.075842   5.554727  27.345595 
+
+Coefficients:
+          Estimate Std. Error t value  Pr(>|t|)    
+TED      -20.27828    3.64490 -5.5635 8.245e-08 ***
+VIX        1.49061    0.17934  8.3115 1.317e-14 ***
+SENT      -1.50379    0.80370 -1.8711  0.062766 .  
+FEDFUNDS   3.37187    0.59797  5.6388 5.657e-08 ***
+Euro     -22.48255    3.32832 -6.7549 1.462e-10 ***
+Dev_PC1   -1.77663    0.53379 -3.3283  0.001037 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    57391
+Residual Sum of Squares: 22536
+R-Squared:      0.60733
+Adj. R-Squared: 0.56883
+F-statistic: 52.5857 on 6 and 204 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_Bond_devpc_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 15, T = 8, N = 120
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-11.34577  -0.99962   0.52292   1.50844   5.52505 
+
+Coefficients:
+         Estimate Std. Error t value Pr(>|t|)  
+TED       3.53870    2.10527  1.6809  0.09591 .
+VIX      -0.14081    0.10213 -1.3788  0.17103  
+SENT      0.92908    0.96281  0.9650  0.33689  
+FEDFUNDS -0.69041    0.53166 -1.2986  0.19707  
+Dev_PC1   0.67313    0.53069  1.2684  0.20760  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    905.89
+Residual Sum of Squares: 839.06
+R-Squared:      0.073777
+Adj. R-Squared: -0.10221
+F-statistic: 1.59308 on 5 and 100 DF, p-value: 0.16893
+# Post 2000
+Bal_Bond_devpc_Post
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 15, T = 7, N = 105
+
+Residuals:
+       Min.     1st Qu.      Median     3rd Qu.        Max. 
+-32.8007351  -5.1844321  -0.0086139   6.7730818  30.2909554 
+
+Coefficients:
+         Estimate Std. Error t value  Pr(>|t|)    
+TED      146.2393    44.2156  3.3074 0.0013872 ** 
+VIX       -7.1728     2.2259 -3.2224 0.0018100 ** 
+SENT     273.2745    68.8470  3.9693 0.0001513 ***
+FEDFUNDS -23.1712     6.8151 -3.4000 0.0010333 ** 
+Euro      37.6390    15.3432  2.4531 0.0162297 *  
+Dev_PC1    4.7839     2.7415  1.7450 0.0846417 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    18332
+Residual Sum of Squares: 10681
+R-Squared:      0.41737
+Adj. R-Squared: 0.27865
+F-statistic: 10.0291 on 6 and 84 DF, p-value: 2.4633e-08
+##
+
+## REITS
+
+# Full
+Bal_REIT_devpc
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 8, T = 15, N = 120
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-36.36763  -7.41107   0.41637   7.96314  29.19068 
+
+Coefficients:
+          Estimate Std. Error t value  Pr(>|t|)    
+TED      -28.17630    6.97151 -4.0416 0.0001008 ***
+VIX        0.84979    0.25335  3.3543 0.0011048 ** 
+SENT       3.25648    0.96197  3.3852 0.0009983 ***
+FEDFUNDS   1.93984    0.86328  2.2471 0.0267086 *  
+Euro     -29.13183    4.96038 -5.8729 4.983e-08 ***
+Dev_PC1   -2.54583    1.17704 -2.1629 0.0327956 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    42747
+Residual Sum of Squares: 16455
+R-Squared:      0.61507
+Adj. R-Squared: 0.56786
+F-statistic: 28.2289 on 6 and 106 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_REIT_devpc_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 8, T = 8, N = 64
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-28.07055  -3.40876   0.46723   3.44018  10.38878 
+
+Coefficients:
+         Estimate Std. Error t value Pr(>|t|)  
+TED       7.59033    5.13189  1.4791  0.14528  
+VIX      -1.07909    0.46476 -2.3218  0.02427 *
+SENT     -1.70791    1.73674 -0.9834  0.33006  
+FEDFUNDS  1.88376    1.43281  1.3147  0.19448  
+Dev_PC1   6.16421    3.95594  1.5582  0.12537  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    2601.4
+Residual Sum of Squares: 2016.8
+R-Squared:      0.22474
+Adj. R-Squared: 0.042322
+F-statistic: 2.95682 on 5 and 51 DF, p-value: 0.020297
+# Post 2000
+Bal_REIT_devpc_Post
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 8, T = 7, N = 56
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-19.45440  -6.44082   0.30975   5.02803  29.93909 
+
+Coefficients:
+          Estimate Std. Error t value  Pr(>|t|)    
+TED      -84.18014   20.39167 -4.1282 0.0001697 ***
+VIX        3.95358    1.09828  3.5998 0.0008342 ***
+SENT     -43.22238   21.99181 -1.9654 0.0560054 .  
+FEDFUNDS   7.41410    3.07508  2.4110 0.0203607 *  
+Euro     -64.08619   13.18577 -4.8603 1.674e-05 ***
+Dev_PC1    0.85629    2.34285  0.3655 0.7165803    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    14023
+Residual Sum of Squares: 5405.2
+R-Squared:      0.61455
+Adj. R-Squared: 0.49524
+F-statistic: 11.1604 on 6 and 42 DF, p-value: 2.0435e-07
+##
+
+##############################################################################################
+
+### Balanced Panel estimation with country level internet usage among explanatory variables
+
+## Equities
+
+# Full
+Bal_Equity_int_use
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 55, T = 15, N = 825
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-34.41327  -7.26085  -0.66362   6.98698  43.74056 
+
+Coefficients:
+                Estimate Std. Error  t value  Pr(>|t|)    
+TED            -8.604424   2.625526  -3.2772 0.0010957 ** 
+VIX            -0.024699   0.124177  -0.1989 0.8423905    
+SENT            2.007638   0.765402   2.6230 0.0088901 ** 
+FEDFUNDS       -0.969510   0.426151  -2.2750 0.0231798 *  
+Euro           -9.548610   2.597302  -3.6764 0.0002531 ***
+Internet_Usage -0.618643   0.061436 -10.0697 < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    251540
+Residual Sum of Squares: 109920
+R-Squared:      0.563
+Adj. R-Squared: 0.52868
+F-statistic: 164.046 on 6 and 764 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_Equity_int_use_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 55, T = 8, N = 440
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-35.5254  -6.1552   1.0777   5.7248  37.8431 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED             9.114821   5.141633  1.7727 0.0770715 .  
+VIX            -1.309740   0.182646 -7.1709 3.917e-12 ***
+SENT            3.365154   1.299948  2.5887 0.0100042 *  
+FEDFUNDS       -3.739092   1.067312 -3.5033 0.0005143 ***
+Internet_Usage -0.486082   0.095461 -5.0920 5.589e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    64121
+Residual Sum of Squares: 45596
+R-Squared:      0.2889
+Adj. R-Squared: 0.1785
+F-statistic: 30.8773 on 5 and 380 DF, p-value: < 2.22e-16
+# Post 2000
+Bal_Equity_int_use_Post
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 55, T = 7, N = 385
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-27.3635  -5.8636  -0.0735   5.4030  30.5467 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED            -46.74654   15.29358 -3.0566 0.0024247 ** 
+VIX              2.14214    0.80091  2.6746 0.0078607 ** 
+SENT           -37.10551   21.02569 -1.7648 0.0785445 .  
+FEDFUNDS         4.39156    2.23851  1.9618 0.0506386 .  
+Euro           -29.02443    7.88306 -3.6819 0.0002711 ***
+Internet_Usage  -0.36881    0.14279 -2.5828 0.0102372 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    50965
+Residual Sum of Squares: 29567
+R-Squared:      0.41985
+Adj. R-Squared: 0.31242
+F-statistic: 39.0794 on 6 and 324 DF, p-value: < 2.22e-16
+# Developed Countries
+Bal_Equity_int_use_Dev
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 29, T = 15, N = 435
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-35.8905  -8.6337  -1.1043   7.7742  41.2894 
+
+Coefficients:
+                Estimate Std. Error  t value  Pr(>|t|)    
+TED            -4.693773   3.361487  -1.3963 0.1633871    
+VIX            -0.265105   0.175309  -1.5122 0.1312690    
+SENT            4.031781   1.187135   3.3962 0.0007516 ***
+FEDFUNDS       -1.956077   0.627662  -3.1164 0.0019625 ** 
+Euro           -9.800883   3.326570  -2.9462 0.0034047 ** 
+Internet_Usage -0.695120   0.065297 -10.6455 < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    189510
+Residual Sum of Squares: 71233
+R-Squared:      0.62412
+Adj. R-Squared: 0.59217
+F-statistic: 110.694 on 6 and 400 DF, p-value: < 2.22e-16
+# Emerging Countries
+Bal_Equity_int_use_Emerg
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 16, T = 15, N = 240
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-28.80365  -6.58184  -0.27018   5.71303  35.23829 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED            -21.52662    3.98029 -5.4083 1.667e-07 ***
+VIX              0.48917    0.20062  2.4383  0.015555 *  
+SENT             0.15747    1.02542  0.1536  0.878093    
+FEDFUNDS         0.38281    0.74217  0.5158  0.606516    
+Euro           -19.44862    3.97354 -4.8945 1.916e-06 ***
+Internet_Usage  -0.36429    0.11666 -3.1226  0.002036 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    55391
+Residual Sum of Squares: 25842
+R-Squared:      0.53346
+Adj. R-Squared: 0.48852
+F-statistic: 41.545 on 6 and 218 DF, p-value: < 2.22e-16
+# Frontier Countries
+# Not Available
+
+## 
+
+## Bonds
+
+# Full
+Bal_Bond_int_use
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 19, T = 15, N = 285
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-30.25740  -4.81193   0.55997   4.51384  29.72088 
+
+Coefficients:
+                 Estimate Std. Error t value  Pr(>|t|)    
+TED            -18.186231   2.957837 -6.1485 2.931e-09 ***
+VIX              1.529333   0.158722  9.6353 < 2.2e-16 ***
+SENT            -1.282382   0.679716 -1.8866   0.06032 .  
+FEDFUNDS         3.079189   0.551326  5.5851 5.879e-08 ***
+Euro           -25.998809   2.888213 -9.0017 < 2.2e-16 ***
+Internet_Usage  -0.101406   0.021378 -4.7434 3.469e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    72916
+Residual Sum of Squares: 26303
+R-Squared:      0.63927
+Adj. R-Squared: 0.60597
+F-statistic: 76.7934 on 6 and 260 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_Bond_int_use_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 19, T = 8, N = 152
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-11.67507  -0.91334   0.24801   1.16407   5.50034 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED             5.711631   1.674495  3.4110 0.0008666 ***
+VIX            -0.013084   0.061735 -0.2119 0.8324890    
+SENT            1.977220   0.799035  2.4745 0.0146505 *  
+FEDFUNDS       -1.563735   0.510367 -3.0639 0.0026641 ** 
+Internet_Usage -0.016897   0.029118 -0.5803 0.5627417    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    882.71
+Residual Sum of Squares: 798.19
+R-Squared:      0.095754
+Adj. R-Squared: -0.066727
+F-statistic: 2.7109 on 5 and 128 DF, p-value: 0.023073
+# Post 2000
+Bal_Bond_int_use_Post
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 19, T = 7, N = 133
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-34.11421  -5.38009   0.79632   6.20284  31.57348 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED            170.77361   35.27356  4.8414 4.322e-06 ***
+VIX             -8.32565    1.76905 -4.7063 7.522e-06 ***
+SENT           309.09965   52.36937  5.9023 4.194e-08 ***
+FEDFUNDS       -26.64774    5.20554 -5.1191 1.347e-06 ***
+Euro            46.37603   13.73178  3.3773  0.001019 ** 
+Internet_Usage   0.44797    0.20153  2.2228  0.028310 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    26023
+Residual Sum of Squares: 12820
+R-Squared:      0.50737
+Adj. R-Squared: 0.3979
+F-statistic: 18.5386 on 6 and 108 DF, p-value: 1.0224e-14
+##
+
+## REITS
+
+# Full
+Bal_REIT_int_use
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 8, T = 15, N = 120
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-23.2122  -6.7142  -1.0440   6.8214  27.2904 
+
+Coefficients:
+                 Estimate Std. Error t value  Pr(>|t|)    
+TED            -21.683649   7.032371 -3.0834 0.0026092 ** 
+VIX              0.500891   0.307051  1.6313 0.1057956    
+SENT             4.143821   1.213512  3.4147 0.0009058 ***
+FEDFUNDS        -0.595154   1.330962 -0.4472 0.6556712    
+Euro           -31.323962   4.234899 -7.3966 3.433e-11 ***
+Internet_Usage  -0.448850   0.095974 -4.6768 8.630e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    49653
+Residual Sum of Squares: 12166
+R-Squared:      0.75497
+Adj. R-Squared: 0.72492
+F-statistic: 54.4344 on 6 and 106 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_REIT_int_use_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 8, T = 8, N = 64
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-7.415647 -2.478979 -0.013494  1.916517  7.689412 
+
+Coefficients:
+                Estimate Std. Error t value Pr(>|t|)   
+TED            18.918550   6.430168  2.9422 0.004893 **
+VIX            -0.476736   0.181613 -2.6250 0.011406 * 
+SENT            3.917850   1.726968  2.2686 0.027554 * 
+FEDFUNDS       -3.622515   1.218868 -2.9720 0.004506 **
+Internet_Usage -0.139445   0.068788 -2.0272 0.047886 * 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    1249.7
+Residual Sum of Squares: 830.78
+R-Squared:      0.33522
+Adj. R-Squared: 0.1788
+F-statistic: 5.14348 on 5 and 51 DF, p-value: 0.00067808
+# Post 2000
+Bal_REIT_int_use_Post
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 8, T = 7, N = 56
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-14.1595  -4.8376  -1.0869   4.5557  14.8542 
+
+Coefficients:
+                Estimate Std. Error t value Pr(>|t|)   
+TED            -41.54476   20.44774 -2.0318 0.048536 * 
+VIX              1.80985    1.15667  1.5647 0.125156   
+SENT           -45.57361   29.27733 -1.5566 0.127065   
+FEDFUNDS         4.81392    3.35392  1.4353 0.158603   
+Euro           -25.78383   10.86228 -2.3737 0.022260 * 
+Internet_Usage  -1.35715    0.41572 -3.2646 0.002185 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    14661
+Residual Sum of Squares: 2932.2
+R-Squared:      0.79999
+Adj. R-Squared: 0.73808
+F-statistic: 27.9984 on 6 and 42 DF, p-value: 3.4769e-13
+##
