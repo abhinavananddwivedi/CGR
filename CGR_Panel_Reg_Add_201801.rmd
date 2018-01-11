@@ -1,0 +1,129 @@
+---
+title: "CGR Panel Regressions Final Models"
+geometry: margin = 1.5in
+linkcolor: blue
+output:
+  #word_document: default
+  pdf_document: default
+documentclass: article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rmarkdown)
+library(knitr)
+library(plm)
+library(lmtest)
+library(lubridate)
+
+source('CGR_Panel_Reg_Add_201801_Panel_Est.R')
+```
+
+```{r display_results, echo=T, results='markup', comment=NA}
+
+#############################################################################################
+
+### Panel Estimation Including Country Level Internet Usage (per 100 persons)
+
+## Equity
+
+# Full
+Panel_Equity_Int_Use
+
+# Pre 2000
+Panel_Equity_Int_Use_Pre
+
+# Post 2000
+Panel_Equity_Int_Use_Post 
+
+# Developed Countries
+Panel_Equity_Int_Use_Dev 
+
+# Emerging Countries
+Panel_Equity_Int_Use_Emerg
+
+# Frontier Countries
+Panel_Equity_Int_Use_Front
+
+##
+
+## Bond
+
+# Full 
+Panel_Bond_Int_Use
+
+# Pre 2000
+Panel_Bond_Int_Use_Pre
+
+# Post 2000
+Panel_Bond_Int_Use_Post
+
+##
+
+## REIT
+
+# Full
+Panel_REIT_Int_Use 
+
+# Pre 2000
+Panel_REIT_Int_Use_Pre 
+
+# Post 2000
+Panel_REIT_Int_Use_Post
+
+##
+
+##############################################################################################
+
+### Panel estimation with country level Developmental PC1 as explanatory variable
+
+## Equity
+
+# Full
+Panel_Equity_devpc
+
+# Pre 2000
+Panel_Equity_devpc_Pre
+
+# Post 2000
+Panel_Equity_devpc_Post
+
+# Developed Countries
+Panel_Equity_devpc_Dev
+
+# Emerging Countries
+Panel_Equity_devpc_Emerg
+
+# Frontier Countries
+Panel_Equity_devpc_Front
+
+##
+
+## Bond
+
+# Full
+Panel_Bond_devpc
+
+# Pre 2000
+Panel_Bond_devpc_Pre
+
+# Post 2000
+Panel_Bond_devpc_Post
+
+##
+
+## REIT
+
+# Full
+Panel_REIT_devpc
+
+# Pre 2000
+Panel_REIT_devpc_Pre
+
+# Post 2000
+Panel_REIT_devpc_Post
+
+##
+
+```

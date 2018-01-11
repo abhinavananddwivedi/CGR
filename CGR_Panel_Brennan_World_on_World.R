@@ -217,3 +217,6 @@ lm_world_b <- lm_est(Form_world, data_world_ols_b)
 # REIT
 
 lm_world_r <- lm_est(Form_world, data_world_ols_r)
+#################################################################################
+
+
