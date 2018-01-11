@@ -20,7 +20,7 @@ library(lubridate)
 source('CGR_Panel_Reg_Add_201801_Panel_Est.R')
 ```
 
-```{r display_results, echo=T, results='markup', comment=NA}
+```{r display_results_unbalanced, echo=T, results='markup', comment=NA}
 
 #############################################################################################
 
@@ -125,5 +125,117 @@ Panel_REIT_devpc_Pre
 Panel_REIT_devpc_Post
 
 ##
+
+```
+
+
+```{r display_results_balanced, echo=T, results='markup', comment=NA}
+
+##############################################################################################
+
+### Balanced Panel estimation with country level Developmental PC1 among explanatory variables
+
+## Equities
+
+# Full
+Bal_Equity_devpc
+
+# Pre 2000
+Bal_Equity_devpc_Pre
+
+# Post 2000
+Bal_Equity_devpc_Post
+
+# Developed Countries
+Bal_Equity_devpc_Dev
+
+# Emerging Countries
+Bal_Equity_devpc_Emerg
+
+# Frontier Countries
+# Not Available
+
+## 
+
+## Bonds
+
+# Full
+Bal_Bond_devpc
+
+# Pre 2000
+Bal_Bond_devpc_Pre
+
+# Post 2000
+Bal_Bond_devpc_Post
+
+
+##
+
+## REITS
+
+# Full
+Bal_REIT_devpc
+
+# Pre 2000
+Bal_REIT_devpc_Pre
+
+# Post 2000
+Bal_REIT_devpc_Post
+
+
+##
+
+##############################################################################################
+
+### Balanced Panel estimation with country level internet usage among explanatory variables
+
+## Equities
+
+# Full
+Bal_Equity_int_use
+
+# Pre 2000
+Bal_Equity_int_use_Pre
+
+# Post 2000
+Bal_Equity_int_use_Post
+
+# Developed Countries
+Bal_Equity_int_use_Dev
+
+# Emerging Countries
+Bal_Equity_int_use_Emerg
+
+# Frontier Countries
+# Not Available
+
+## 
+
+## Bonds
+
+# Full
+Bal_Bond_int_use
+
+# Pre 2000
+Bal_Bond_int_use_Pre
+
+# Post 2000
+Bal_Bond_int_use_Post
+
+##
+
+## REITS
+
+# Full
+Bal_REIT_int_use
+
+# Pre 2000
+Bal_REIT_int_use_Pre
+
+# Post 2000
+Bal_REIT_int_use_Post
+
+##
+
 
 ```

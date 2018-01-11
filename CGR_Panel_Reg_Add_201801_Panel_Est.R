@@ -237,3 +237,238 @@ Panel_REIT_devpc <- panel_est(REIT_devpc, data_REIT_devpc)
 
 Panel_REIT_devpc_Pre <- panel_est(REIT_pre_devpc, subset(data_REIT_devpc, Year %in% year_pre_00))
 Panel_REIT_devpc_Post <- panel_est(REIT_post_devpc, subset(data_REIT_devpc, Year %in% year_post_00))
+
+#########################################################################################################
+
+#############################################################################################
+### BALANCED REGRESSIONS CARRIED OUT HEREON #################################################
+#############################################################################################
+
+# Note that ERM is never a factor in balanced regressions: 1996--2010
+
+### Panel Estimation Formulas ###############################################################
+
+## Equity
+
+Equity_devpc_bal <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + Dev_PC1
+Equity_devpc_bal_pre <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Dev_PC1
+Equity_devpc_bal_post <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + Dev_PC1
+
+Equity_int_use_bal <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + Internet_Usage
+Equity_int_use_bal_pre <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Internet_Usage
+Equity_int_use_bal_post <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + Internet_Usage
+
+## Bond
+
+Bond_devpc_bal <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + Euro + Dev_PC1
+Bond_devpc_bal_pre <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + Dev_PC1
+Bond_devpc_bal_post <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + Euro + Dev_PC1
+
+Bond_int_use_bal <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + Euro + Internet_Usage
+Bond_int_use_bal_pre <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + Internet_Usage
+Bond_int_use_bal_post <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + Euro + Internet_Usage
+
+## REIT
+
+REIT_devpc_bal <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + Euro + Dev_PC1
+REIT_devpc_bal_pre <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + Dev_PC1
+REIT_devpc_bal_post <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + Euro + Dev_PC1
+
+REIT_int_use_bal <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + Euro + Internet_Usage
+REIT_int_use_bal_pre <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + Internet_Usage
+REIT_int_use_bal_post <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + Euro + Internet_Usage
+
+#######################################################################################################
+
+###########################################################################################
+### BALANCED MODELS #######################################################################
+###########################################################################################
+
+### Equity Panels Balanced #################################################################
+
+### With country level developmental PC1 in RHS
+
+temp_devpc <- Panel_equity %>%
+  dplyr::select(-c(INTERNET, US_bond_spread:Equity_Liq)) %>%
+  dplyr::filter(Year %in% year_bal)
+
+bal_eq_devpc <- c()
+
+for (i in 1:length(name_country_equity))
+{
+  temp_new <- temp_devpc[which(temp_devpc$Country == name_country_equity[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_eq_devpc <- rbind(bal_eq_devpc, temp_new)
+  }
+}
+
+attach(bal_eq_devpc)
+
+Bal_Equity_devpc <- panel_est(Equity_devpc_bal, bal_eq_devpc)
+
+Bal_Equity_devpc_Pre <- panel_est(Equity_devpc_bal_pre, subset(bal_eq_devpc, Year %in% year_bal_1))
+Bal_Equity_devpc_Post <- panel_est(Equity_devpc_bal_post, subset(bal_eq_devpc, Year %in% year_bal_2))
+
+Bal_Equity_devpc_Dev <- panel_est(Equity_devpc_bal, subset(bal_eq_devpc, Country %in% name_eq_developed))
+Bal_Equity_devpc_Emerg <- panel_est(Equity_devpc_bal, subset(bal_eq_devpc, Country %in% name_eq_emerging))
+#Bal_Equity_New_Front <- panel_est(Equity_new_bal, subset(bal_eq_new, Country %in% name_eq_frontier))
+
+
+detach(bal_eq_devpc)
+
+### With country level internet usage in RHS
+
+temp_int_use <- Panel_equity %>%
+  dplyr::select(-c(INTERNET, US_bond_spread:Life_Exp, Equity_Liq:Dev_PC1)) %>% 
+  dplyr::filter(Year %in% year_bal)
+
+bal_eq_int_use <- c()
+
+for (i in 1:length(name_country_equity))
+{
+  temp_new <- temp_int_use[which(temp_int_use$Country == name_country_equity[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_eq_int_use <- rbind(bal_eq_int_use, temp_new)
+  }
+}
+
+attach(bal_eq_int_use)
+
+Bal_Equity_int_use <- panel_est(Equity_int_use_bal, bal_eq_int_use)
+
+Bal_Equity_int_use_Pre <- panel_est(Equity_int_use_bal_pre, subset(bal_eq_int_use, Year %in% year_bal_1))
+Bal_Equity_int_use_Post <- panel_est(Equity_int_use_bal_post, subset(bal_eq_int_use, Year %in% year_bal_2))
+
+Bal_Equity_int_use_Dev <- panel_est(Equity_int_use_bal, subset(bal_eq_int_use, Country %in% name_eq_developed))
+Bal_Equity_int_use_Emerg <- panel_est(Equity_int_use_bal, subset(bal_eq_int_use, Country %in% name_eq_emerging))
+#Bal_Equity_New_Front <- panel_est(Equity_new_bal, subset(bal_eq_new, Country %in% name_eq_frontier))
+
+
+detach(bal_eq_int_use)
+
+
+##########################################################################################################
+
+### Bond Panels Balanced #################################################################
+
+### With country level developmental PC1 in RHS
+
+temp_devpc <- Panel_bond %>%
+  dplyr::select(-c(INTERNET, US_bond_spread:Bond_Liq)) %>%
+  dplyr::filter(Year %in% year_bal)
+
+bal_b_devpc <- c()
+
+for (i in 1:length(name_country_bond))
+{
+  temp_new <- temp_devpc[which(temp_devpc$Country == name_country_bond[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_b_devpc <- rbind(bal_b_devpc, temp_new)
+  }
+}
+
+attach(bal_b_devpc)
+
+Bal_Bond_devpc <- panel_est(Bond_devpc_bal, bal_b_devpc)
+
+Bal_Bond_devpc_Pre <- panel_est(Bond_devpc_bal_pre, subset(bal_b_devpc, Year %in% year_bal_1))
+Bal_Bond_devpc_Post <- panel_est(Bond_devpc_bal_post, subset(bal_b_devpc, Year %in% year_bal_2))
+
+detach(bal_b_devpc)
+
+### With country level internet usage in RHS
+
+temp_int_use <- Panel_bond %>%
+  dplyr::select(-c(INTERNET, US_bond_spread:Life_Exp, Bond_Liq:Dev_PC1)) %>% 
+  dplyr::filter(Year %in% year_bal)
+
+bal_b_int_use <- c()
+
+for (i in 1:length(name_country_bond))
+{
+  temp_new <- temp_int_use[which(temp_int_use$Country == name_country_bond[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_b_int_use <- rbind(bal_b_int_use, temp_new)
+  }
+}
+
+attach(bal_b_int_use)
+
+Bal_Bond_int_use <- panel_est(Bond_int_use_bal, bal_b_int_use)
+
+Bal_Bond_int_use_Pre <- panel_est(Bond_int_use_bal_pre, subset(bal_b_int_use, Year %in% year_bal_1))
+Bal_Bond_int_use_Post <- panel_est(Bond_int_use_bal_post, subset(bal_b_int_use, Year %in% year_bal_2))
+
+detach(bal_b_int_use)
+
+
+##########################################################################################################
+
+##########################################################################################################
+
+### REIT Panels Balanced #################################################################
+
+### With country level developmental PC1 in RHS
+
+temp_devpc <- Panel_REIT %>%
+  dplyr::select(-c(INTERNET, US_bond_spread:REIT_Liq)) %>%
+  dplyr::filter(Year %in% year_bal)
+
+bal_r_devpc <- c()
+
+for (i in 1:length(name_country_REIT))
+{
+  temp_new <- temp_devpc[which(temp_devpc$Country == name_country_REIT[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_r_devpc <- rbind(bal_r_devpc, temp_new)
+  }
+}
+
+attach(bal_r_devpc)
+
+Bal_REIT_devpc <- panel_est(REIT_devpc_bal, bal_r_devpc)
+
+Bal_REIT_devpc_Pre <- panel_est(REIT_devpc_bal_pre, subset(bal_r_devpc, Year %in% year_bal_1))
+Bal_REIT_devpc_Post <- panel_est(REIT_devpc_bal_post, subset(bal_r_devpc, Year %in% year_bal_2))
+
+detach(bal_r_devpc)
+
+### With country level internet usage in RHS
+
+temp_int_use <- Panel_REIT %>%
+  dplyr::select(-c(INTERNET, US_bond_spread:Life_Exp, REIT_Liq:Dev_PC1)) %>% 
+  dplyr::filter(Year %in% year_bal)
+
+bal_r_int_use <- c()
+
+for (i in 1:length(name_country_REIT))
+{
+  temp_new <- temp_int_use[which(temp_int_use$Country == name_country_REIT[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_r_int_use <- rbind(bal_r_int_use, temp_new)
+  }
+}
+
+attach(bal_r_int_use)
+
+Bal_REIT_int_use <- panel_est(REIT_int_use_bal, bal_r_int_use)
+
+Bal_REIT_int_use_Pre <- panel_est(REIT_int_use_bal_pre, subset(bal_r_int_use, Year %in% year_bal_1))
+Bal_REIT_int_use_Post <- panel_est(REIT_int_use_bal_post, subset(bal_r_int_use, Year %in% year_bal_2))
+
+detach(bal_r_int_use)
+
+
+##########################################################################################################
