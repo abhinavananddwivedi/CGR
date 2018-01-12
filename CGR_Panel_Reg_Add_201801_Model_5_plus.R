@@ -222,3 +222,180 @@ Panel_Equity_model_5_aug_devpc_Emerg <- panel_est(Equity_model_5_aug_devpc,
                                                 subset(data_equity_model_5_aug_devpc, Country %in% name_eq_emerging))
 Panel_Equity_model_5_aug_devpc_Front <- panel_est(Equity_model_5_aug_devpc, 
                                                 subset(data_equity_model_5_aug_devpc, Country %in% name_eq_frontier))
+
+################################################################################################
+##### BALANCED PANEL ESTIMATIONS BEGIN HERERON #################################################
+################################################################################################
+
+# Note that ERM is never a factor in balanced regressions: 1996--2010
+
+### Panel Estimation Formulas ##################################################################
+
+# Model 5
+
+Equity_model_5_bal <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+
+Equity_model_5_bal_pre <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS +
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+
+Equity_model_5_bal_post <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+
+# Model 5 + Equity_Liq + Internet_Usage
+
+Equity_model_5_aug_int_bal <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Equity_Liq + Internet_Usage
+
+Equity_model_5_aug_int_bal_pre <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Equity_Liq + Internet_Usage
+
+Equity_model_5_aug_int_bal_post <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Equity_Liq + Internet_Usage
+
+# Model 5 + Equity_Liq + Developmental PC1
+
+Equity_model_5_aug_devpc_bal <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Equity_Liq + Dev_PC1
+
+Equity_model_5_aug_devpc_bal_pre <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS +
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Equity_Liq + Dev_PC1
+
+Equity_model_5_aug_devpc_bal_post <- LHS_div_eq ~ TED + VIX + SENT + FEDFUNDS + Euro + 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Equity_Liq + Dev_PC1
+
+#####################################################################################
+
+### Balanced Panel Estimations: Model #5
+
+temp_model_5 <- Panel_equity %>%
+  dplyr::select(c(Country:FEDFUNDS, ERM:Euro, Agg_Fin_Risk:Agg_Pol_Risk)) %>% 
+  dplyr::filter(Year %in% year_bal)
+
+bal_eq_model_5 <- c()
+
+for (i in 1:length(name_country_equity))
+{
+  temp_new <- temp_model_5[which(temp_model_5$Country == name_country_equity[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_eq_model_5 <- rbind(bal_eq_model_5, temp_new)
+  }
+}
+
+attach(bal_eq_model_5)
+
+Bal_Equity_model_5 <- panel_est(Equity_model_5_bal, bal_eq_model_5)
+
+Bal_Equity_model_5_Pre <- panel_est(Equity_model_5_bal_pre, subset(bal_eq_model_5, Year %in% year_bal_1))
+Bal_Equity_model_5_Post <- panel_est(Equity_model_5_bal_post, subset(bal_eq_model_5, Year %in% year_bal_2))
+
+Bal_Equity_model_5_Dev <- panel_est(Equity_model_5_bal, subset(bal_eq_model_5, Country %in% name_eq_developed))
+Bal_Equity_model_5_Emerg <- panel_est(Equity_model_5_bal, subset(bal_eq_model_5, Country %in% name_eq_emerging))
+#Bal_Equity_New_Front <- panel_est(Equity_new_bal, subset(bal_eq_new, Country %in% name_eq_frontier))
+
+detach(bal_eq_model_5)
+####################################################################################################
+
+### Balanced Panel Estimations: Model #5 Augmented with Equity_Liq and Int_Use
+
+temp_model_5_aug_int <- Panel_equity %>%
+  dplyr::select(c(Country:FEDFUNDS, ERM:Euro, Agg_Fin_Risk:Agg_Pol_Risk, Internet_Usage:Equity_Liq)) %>% 
+  dplyr::filter(Year %in% year_bal)
+
+bal_eq_model_5_aug_int <- c()
+
+for (i in 1:length(name_country_equity))
+{
+  temp_new <- temp_model_5_aug_int[which(temp_model_5_aug_int$Country == name_country_equity[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_eq_model_5_aug_int <- rbind(bal_eq_model_5_aug_int, temp_new)
+  }
+}
+
+attach(bal_eq_model_5_aug_int)
+
+Bal_Equity_model_5_aug_int <- panel_est(Equity_model_5_aug_int_bal, bal_eq_model_5_aug_int)
+
+Bal_Equity_model_5_aug_int_Pre <- panel_est(Equity_model_5_aug_int_bal_pre, 
+                                            subset(bal_eq_model_5_aug_int, Year %in% year_bal_1))
+Bal_Equity_model_5_aug_int_Post <- panel_est(Equity_model_5_aug_int_bal_post, 
+                                             subset(bal_eq_model_5_aug_int, Year %in% year_bal_2))
+
+Bal_Equity_model_5_aug_int_Dev <- panel_est(Equity_model_5_aug_int_bal, 
+                                            subset(bal_eq_model_5_aug_int, Country %in% name_eq_developed))
+Bal_Equity_model_5_aug_int_Emerg <- panel_est(Equity_model_5_aug_int_bal, 
+                                              subset(bal_eq_model_5_aug_int, Country %in% name_eq_emerging))
+#Bal_Equity_New_Front <- panel_est(Equity_new_bal, subset(bal_eq_new, Country %in% name_eq_frontier))
+
+detach(bal_eq_model_5_aug_int)
+####################################################################################################
+
+### Balanced Panel Estimations: Model #5 Augmented with Equity_Liq and Dev_PC1
+
+temp_model_5_aug_devpc <- Panel_equity %>%
+  dplyr::select(c(Country:FEDFUNDS, ERM:Euro, Agg_Fin_Risk:Agg_Pol_Risk, Equity_Liq, Dev_PC1)) %>% 
+  dplyr::filter(Year %in% year_bal)
+
+bal_eq_model_5_aug_devpc <- c()
+
+for (i in 1:length(name_country_equity))
+{
+  temp_new <- temp_model_5_aug_devpc[which(temp_model_5_aug_devpc$Country == name_country_equity[i]), ]
+  
+  if (all(is.na(temp_new) == F)) #If no missing values
+  {
+    bal_eq_model_5_aug_devpc <- rbind(bal_eq_model_5_aug_devpc, temp_new)
+  }
+}
+
+attach(bal_eq_model_5_aug_devpc)
+
+Bal_Equity_model_5_aug_devpc <- panel_est(Equity_model_5_aug_devpc_bal, bal_eq_model_5_aug_devpc)
+
+Bal_Equity_model_5_aug_devpc_Pre <- panel_est(Equity_model_5_aug_devpc_bal_pre, 
+                                            subset(bal_eq_model_5_aug_devpc, Year %in% year_bal_1))
+Bal_Equity_model_5_aug_devpc_Post <- panel_est(Equity_model_5_aug_devpc_bal_post, 
+                                             subset(bal_eq_model_5_aug_devpc, Year %in% year_bal_2))
+
+Bal_Equity_model_5_aug_devpc_Dev <- panel_est(Equity_model_5_aug_devpc_bal, 
+                                            subset(bal_eq_model_5_aug_devpc, Country %in% name_eq_developed))
+Bal_Equity_model_5_aug_devpc_Emerg <- panel_est(Equity_model_5_aug_devpc_bal, 
+                                              subset(bal_eq_model_5_aug_devpc, Country %in% name_eq_emerging))
+#Bal_Equity_New_Front <- panel_est(Equity_new_bal, subset(bal_eq_new, Country %in% name_eq_frontier))
+
+detach(bal_eq_model_5_aug_devpc)
+####################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

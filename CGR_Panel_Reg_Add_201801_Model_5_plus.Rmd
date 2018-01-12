@@ -24,8 +24,8 @@ source('CGR_Panel_Reg_Add_201801_Model_5_plus.R')
 ```{r display_results_unbalanced, echo=T, results='markup', comment=NA}
 
 #############################################################################################
-
-### Equity Panel Estimation Augmented Model #5 
+### Unbalanced Equity Panel Estimation Augmented Model #5 ###################################
+#############################################################################################
 
 ## Model Number 5
 
@@ -90,6 +90,70 @@ Panel_Equity_model_5_aug_devpc_Emerg
 
 # Frontier Countries
 Panel_Equity_model_5_aug_devpc_Front
+
+##
+```
+
+```{r display_results_balanced, echo=T, results='markup', comment=NA}
+
+#########################################################################################
+### Balanced Equity Panel Estimation Augmented Model #5 #################################
+#########################################################################################
+
+## Model Number 5
+
+# Full
+Bal_Equity_model_5
+
+# Pre 2000
+Bal_Equity_model_5_Pre
+
+# Post 2000
+Bal_Equity_model_5_Post 
+
+# Developed Countries
+Bal_Equity_model_5_Dev 
+
+# Emerging Countries
+Bal_Equity_model_5_Emerg
+
+##
+
+## Model Number 5 with Equity_Liq and Int_Use
+
+# Full
+Bal_Equity_model_5_aug_int
+
+# Pre 2000
+Bal_Equity_model_5_aug_int_Pre
+
+# Post 2000
+Bal_Equity_model_5_aug_int_Post 
+
+# Developed Countries
+Bal_Equity_model_5_aug_int_Dev 
+
+# Emerging Countries
+Bal_Equity_model_5_aug_int_Emerg
+
+##
+
+## Model Number 5 with Equity_Liq and Dev_PC1
+
+# Full
+Bal_Equity_model_5_aug_devpc
+
+# Pre 2000
+Bal_Equity_model_5_aug_devpc_Pre
+
+# Post 2000
+Bal_Equity_model_5_aug_devpc_Post 
+
+# Developed Countries
+Bal_Equity_model_5_aug_devpc_Dev 
+
+# Emerging Countries
+Bal_Equity_model_5_aug_devpc_Emerg
 
 ##
 
