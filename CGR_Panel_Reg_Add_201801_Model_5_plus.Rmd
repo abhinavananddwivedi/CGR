@@ -3,8 +3,8 @@ title: "CGR Panel Regressions Model Number 5"
 geometry: margin = 1.5in
 linkcolor: blue
 output:
-  #word_document: default
-  pdf_document: default
+  word_document: default
+  #pdf_document: default
 documentclass: article
 ---
 
