@@ -1,0 +1,29 @@
+---
+title: "World on World OLS Regressions: All Asset Class Average"
+geometry: margin = 1.5in
+linkcolor: blue
+output:
+  #word_document: default
+  pdf_document: default
+documentclass: article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rmarkdown)
+library(knitr)
+library(plm)
+library(lmtest)
+library(lubridate)
+
+source('CGR_Panel_Brennan_World_on_World.R')
+```
+
+```{r World_OLS_All_Assets, echo=T, results='markup', comment=NA}
+
+# All assets together
+
+lm_est(Form_world_all, data_world_ols_all)
+
+```

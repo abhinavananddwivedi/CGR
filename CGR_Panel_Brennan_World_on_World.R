@@ -27,9 +27,11 @@ file_path_script_process <- "CGR_Panel_Reg_Add_201707_Post_Processing.R" # Post 
 # script file that tidily reads and parses the data
 source(file_path_script_process, echo = F) # Post-processed data files
 
+year_LHS <- 1986:2012
+
 ##################################################################################
 
-### Emerging and developed equity markets ########################################
+### Country Names ########################################
 
 name_country_equity <- LHS_equity %>%
   dplyr::select(-Year) %>%
@@ -84,22 +86,6 @@ index_eq_developed <- lubridate::setdiff(1:length(name_country_equity), index_eq
 name_eq_emerging <- name_country_equity[index_eq_emerging]
 name_eq_frontier <- name_country_equity[index_eq_frontier]
 name_eq_developed <- name_country_equity[index_eq_developed]
-
-############################################################################################
-
-### Partitioning Years #####################################################################
-
-year_liq <- 1985:2016
-year_pol <- 1984:2013
-year_dev <- 1980:2016
-year_pre_00 <- 1986:1999
-year_post_00 <- 2000:2012
-year_LHS <- 1986:2012
-year_bal <- 1996:2010
-year_bal_1 <- 1996:2003
-year_bal_2 <- 2004:2010
-
-############################################################################################
 
 ### Brennan Regressions Follow #############################################################
 
@@ -181,6 +167,21 @@ LHS_world_r <- LHS_REIT %>% dplyr::select(-Year) %>%
 data_world_ols_r <- dplyr::left_join(LHS_world_r, RHS_common, by = "Year") %>%
   dplyr::select(-c(`BAA-AAA`, Year))
 
+### Total Average Across All Asset Classes---Equity, Bonds and REITs
+
+LHS_world_all <- dplyr::full_join(LHS_equity, LHS_bond, by = "Year") %>%
+  dplyr::full_join(., LHS_REIT, by = "Year") %>%
+  dplyr::select(-Year) %>%
+  rowMeans(., na.rm = T) %>% 
+  as_tibble(.) %>%
+  dplyr::mutate(., year_LHS) %>% 
+  dplyr::select(year_LHS, everything()) %>%
+  dplyr::rename(`Year` = year_LHS,
+                `World_Avg_All` = value)
+
+data_world_ols_all <- dplyr::left_join(LHS_world_all, RHS_common, by = "Year") %>%
+  dplyr::select(-c(`BAA-AAA`, Year))
+
 
 ## Formulas for Brennan regressions
 
@@ -188,6 +189,8 @@ Form_world <- World_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 Form_dev <- Dev_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 Form_emerg <- Emerg_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 Form_front <- Front_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
+
+Form_world_all <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 
 ## Linear Models for Brennan Regressions
 
@@ -217,6 +220,8 @@ lm_world_b <- lm_est(Form_world, data_world_ols_b)
 # REIT
 
 lm_world_r <- lm_est(Form_world, data_world_ols_r)
-#################################################################################
 
+# All assets together
+
+lm_world_all <- lm_est(Form_world_all, data_world_ols_all)
 
