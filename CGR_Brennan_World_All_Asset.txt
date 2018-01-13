@@ -1,0 +1,29 @@
+﻿World on World OLS Regressions: All Asset Class Average
+# All assets together
+
+lm_est(Form_world_all, data_world_ols_all)
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.7952 -1.1759  0.4142  1.6671  4.6528 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  95.7178     4.5992  20.812 2.30e-11 ***
+TED          -6.1302     3.7983  -1.614  0.13054    
+VIX           0.1386     0.1682   0.824  0.42505    
+SENT         -1.3540     1.5700  -0.862  0.40406    
+FEDFUNDS      0.3763     0.6821   0.552  0.59049    
+INTERNET     -1.1078     0.1520  -7.286 6.13e-06 ***
+ERM         -15.5081     3.7908  -4.091  0.00127 ** 
+Euro         -2.7650     3.7234  -0.743  0.47093    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.399 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.943, Adjusted R-squared:  0.9124 
+F-statistic: 30.74 on 7 and 13 DF,  p-value: 4.195e-07
