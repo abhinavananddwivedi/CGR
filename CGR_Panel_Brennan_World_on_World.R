@@ -87,6 +87,11 @@ name_eq_emerging <- name_country_equity[index_eq_emerging]
 name_eq_frontier <- name_country_equity[index_eq_frontier]
 name_eq_developed <- name_country_equity[index_eq_developed]
 
+#### Special 12 Country Results ############################################################
+
+index_special_12 <- c(2, 6, 10, 23, 24, 34, 36, 53, 54, 72, 85, 86)
+name_special_12 <- name_country_equity[index_special_12] 
+
 ### Brennan Regressions Follow #############################################################
 
 ## EQUITY
@@ -182,6 +187,24 @@ LHS_world_all <- dplyr::full_join(LHS_equity, LHS_bond, by = "Year") %>%
 data_world_ols_all <- dplyr::left_join(LHS_world_all, RHS_common, by = "Year") %>%
   dplyr::select(-c(`BAA-AAA`, Year))
 
+### Special 12 Average Across All Asset Classes
+
+temp_eq <- LHS_equity_long %>% dplyr::filter(., Country %in% name_special_12)
+temp_b <- LHS_bond_long %>% dplyr::filter(., Country %in% name_special_12)
+temp_r <- LHS_REIT_long %>% dplyr::filter(., Country %in% name_special_12)
+
+temp_sp_12_all <- dplyr::full_join(temp_eq, temp_b, by = c("Country", "Year")) %>%
+  dplyr::full_join(., temp_r, by = c("Country", "Year"))
+
+temp_sp_12_avg <- temp_sp_12_all %>% dplyr::select(-c(Country, Year)) %>%
+  rowMeans(., na.rm = T) %>% dplyr::as_tibble(.) %>%
+  dplyr::bind_cols(temp_sp_12_all, .) %>%
+  dplyr::rename(`Diversification_Average_Special_12` = value)
+
+data_special_12_all <- temp_sp_12_avg %>% 
+  dplyr::select(Country, Year, Diversification_Average_Special_12) %>% 
+  left_join(., RHS_common, by = "Year") %>% 
+  dplyr::select(-c(`BAA-AAA`))
 
 ## Formulas for Brennan regressions
 
@@ -191,6 +214,9 @@ Form_emerg <- Emerg_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 Form_front <- Front_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 
 Form_world_all <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
+
+Form_special_12_all <- Diversification_Average_Special_12 ~ TED + VIX + SENT + FEDFUNDS + 
+  INTERNET + ERM + Euro
 
 ## Linear Models for Brennan Regressions
 
@@ -203,6 +229,22 @@ lm_est <- function(form, data_ols)
   #temp_out$coefficients <- unclass(temp_est_rob)
   
   return(temp_out)
+}
+
+## Panel Estimation for Special 12 countries
+
+panel_est <- function(form, data_matrix)
+{
+  mdl <- "within"
+  ind <- c("Country", "Year")
+  
+  panel_reg <- plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+  panel_reg_rob <- lmtest::coeftest(panel_reg, vcovHC(panel_reg, type = "HC0", cluster = "group"))
+  
+  test_out <- summary(panel_reg)
+  test_out$coefficients <- unclass(panel_reg_rob) #Include robust coefficients and T stats
+  
+  return(test_out)
 }
 
 
@@ -224,4 +266,8 @@ lm_world_r <- lm_est(Form_world, data_world_ols_r)
 # All assets together
 
 lm_world_all <- lm_est(Form_world_all, data_world_ols_all)
+
+# Special 12 all assets together
+
+panel_special_12 <- panel_est(Form_special_12_all, data_special_12_all)
 
