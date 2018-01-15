@@ -27,3 +27,34 @@ Residual standard error: 3.399 on 13 degrees of freedom
   (6 observations deleted due to missingness)
 Multiple R-squared:  0.943, Adjusted R-squared:  0.9124 
 F-statistic: 30.74 on 7 and 13 DF,  p-value: 4.195e-07
+# Special 12 all assets together
+
+panel_est(Form_special_12_all, data_special_12_all)
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 12, T = 21, N = 252
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-28.07825  -5.71872  -0.63342   5.04082  36.14111 
+
+Coefficients:
+           Estimate Std. Error t value  Pr(>|t|)    
+TED       -5.932488   3.611108 -1.6428   0.10176    
+VIX        0.146661   0.081247  1.8051   0.07235 .  
+SENT      -0.727099   0.512025 -1.4200   0.15693    
+FEDFUNDS   0.471201   0.263635  1.7873   0.07518 .  
+INTERNET  -1.612662   0.183372 -8.7945 3.248e-16 ***
+ERM      -20.308476   3.313825 -6.1284 3.754e-09 ***
+Euro      -1.548770   2.987810 -0.5184   0.60470    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    76282
+Residual Sum of Squares: 17456
+R-Squared:      0.77117
+Adj. R-Squared: 0.75349
+F-statistic: 112.174 on 7 and 233 DF, p-value: < 2.22e-16
