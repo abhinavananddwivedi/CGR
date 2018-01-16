@@ -28,7 +28,7 @@ lm_est(Form_world_all, data_world_ols_all)
 
 # Special 12 all assets together
 
-panel_est(Form_special_12_all, data_special_12_all)
+res_sp_12
 
 
 ```

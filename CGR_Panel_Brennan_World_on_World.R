@@ -231,22 +231,6 @@ lm_est <- function(form, data_ols)
   return(temp_out)
 }
 
-## Panel Estimation for Special 12 countries
-
-panel_est <- function(form, data_matrix)
-{
-  mdl <- "within"
-  ind <- c("Country", "Year")
-  
-  panel_reg <- plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
-  panel_reg_rob <- lmtest::coeftest(panel_reg, vcovHC(panel_reg, type = "HC0", cluster = "group"))
-  
-  test_out <- summary(panel_reg)
-  test_out$coefficients <- unclass(panel_reg_rob) #Include robust coefficients and T stats
-  
-  return(test_out)
-}
-
 
 # Equity Regressions
 
@@ -267,7 +251,18 @@ lm_world_r <- lm_est(Form_world, data_world_ols_r)
 
 lm_world_all <- lm_est(Form_world_all, data_world_ols_all)
 
-# Special 12 all assets together
+# Special 12 Countries OLS Regressions 
 
-panel_special_12 <- panel_est(Form_special_12_all, data_special_12_all)
+res_sp_12 <- list()
 
+for (i in 1:length(name_special_12))
+{
+  temp_res <- data_special_12_all[which(data_special_12_all$Country == name_special_12[i]), ] %>%
+    dplyr::select(-c(Country, Year))
+  
+  lm_sp_12 <- lm_est(Form_special_12_all, temp_res)
+  
+  res_sp_12[[i]] <- lm_sp_12
+}
+
+names(res_sp_12) <- name_special_12
