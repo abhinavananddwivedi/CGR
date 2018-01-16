@@ -29,32 +29,338 @@ Multiple R-squared:  0.943, Adjusted R-squared:  0.9124
 F-statistic: 30.74 on 7 and 13 DF,  p-value: 4.195e-07
 # Special 12 all assets together
 
-panel_est(Form_special_12_all, data_special_12_all)
-Oneway (individual) effect Within Model
+res_sp_12
+$Australia
 
 Call:
-plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
-
-Balanced Panel: n = 12, T = 21, N = 252
+lm(formula = form, data = data_ols, na.action = na.omit)
 
 Residuals:
-     Min.   1st Qu.    Median   3rd Qu.      Max. 
--28.07825  -5.71872  -0.63342   5.04082  36.14111 
+    Min      1Q  Median      3Q     Max 
+-27.322  -1.001   1.100   3.296  13.536 
 
 Coefficients:
-           Estimate Std. Error t value  Pr(>|t|)    
-TED       -5.932488   3.611108 -1.6428   0.10176    
-VIX        0.146661   0.081247  1.8051   0.07235 .  
-SENT      -0.727099   0.512025 -1.4200   0.15693    
-FEDFUNDS   0.471201   0.263635  1.7873   0.07518 .  
-INTERNET  -1.612662   0.183372 -8.7945 3.248e-16 ***
-ERM      -20.308476   3.313825 -6.1284 3.754e-09 ***
-Euro      -1.548770   2.987810 -0.5184   0.60470    
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  95.8254    14.0073   6.841 1.19e-05 ***
+TED         -16.2336    11.5681  -1.403  0.18396    
+VIX           0.3992     0.5124   0.779  0.44989    
+SENT         -2.1788     4.7815  -0.456  0.65614    
+FEDFUNDS      0.4016     2.0773   0.193  0.84971    
+INTERNET     -1.6325     0.4631  -3.525  0.00373 ** 
+ERM         -13.9965    11.5454  -1.212  0.24697    
+Euro         -6.2705    11.3401  -0.553  0.58968    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Total Sum of Squares:    76282
-Residual Sum of Squares: 17456
-R-Squared:      0.77117
-Adj. R-Squared: 0.75349
-F-statistic: 112.174 on 7 and 233 DF, p-value: < 2.22e-16
+Residual standard error: 10.35 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.7989,    Adjusted R-squared:  0.6906 
+F-statistic: 7.379 on 7 and 13 DF,  p-value: 0.001073
+
+
+$Belgium
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-8.993 -1.404  0.000  2.131  8.642 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  89.5757     6.9998  12.797 9.63e-09 ***
+TED          -0.5402     5.7809  -0.093 0.926981    
+VIX           0.4065     0.2561   1.588 0.136401    
+SENT          4.2484     2.3894   1.778 0.098787 .  
+FEDFUNDS      0.2788     1.0381   0.269 0.792466    
+INTERNET     -2.1716     0.2314  -9.384 3.74e-07 ***
+ERM         -31.3122     5.7696  -5.427 0.000116 ***
+Euro         -2.1435     5.6669  -0.378 0.711348    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.174 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.9607,    Adjusted R-squared:  0.9396 
+F-statistic: 45.45 on 7 and 13 DF,  p-value: 3.883e-08
+
+
+$Canada
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6.1287 -0.7995  0.0000  1.1116  5.7936 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  95.65569    4.42273  21.628 1.41e-11 ***
+TED         -16.27926    3.65255  -4.457 0.000646 ***
+VIX           0.03926    0.16179   0.243 0.812038    
+SENT         -1.62135    1.50972  -1.074 0.302381    
+FEDFUNDS      1.77358    0.65590   2.704 0.018054 *  
+INTERNET     -1.03461    0.14621  -7.076 8.34e-06 ***
+ERM          -0.20235    3.64539  -0.056 0.956578    
+Euro        -15.75219    3.58055  -4.399 0.000718 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.269 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.9744,    Adjusted R-squared:  0.9607 
+F-statistic: 70.81 on 7 and 13 DF,  p-value: 2.459e-09
+
+
+$France
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.9828 -2.0408  0.3952  1.8684  5.5050 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  93.03359    5.35806  17.363 2.24e-10 ***
+TED          -3.06976    4.42501  -0.694    0.500    
+VIX           0.07181    0.19601   0.366    0.720    
+SENT         -0.38023    1.82901  -0.208    0.839    
+FEDFUNDS      0.72830    0.79461   0.917    0.376    
+INTERNET     -2.18354    0.17713 -12.327 1.51e-08 ***
+ERM         -29.79902    4.41633  -6.747 1.37e-05 ***
+Euro         -0.76625    4.33778  -0.177    0.863    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.96 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.978, Adjusted R-squared:  0.9661 
+F-statistic: 82.51 on 7 and 13 DF,  p-value: 9.387e-10
+
+
+$Germany
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-10.9761  -2.3175   0.5657   2.4034   6.6181 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  89.9944     6.9045  13.034 7.71e-09 ***
+TED           1.4750     5.7022   0.259 0.799931    
+VIX           0.2012     0.2526   0.796 0.440075    
+SENT         -2.1718     2.3569  -0.921 0.373582    
+FEDFUNDS      0.2342     1.0240   0.229 0.822674    
+INTERNET     -1.5992     0.2283  -7.006 9.25e-06 ***
+ERM         -30.6718     5.6910  -5.390 0.000123 ***
+Euro          3.3967     5.5897   0.608 0.553879    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.103 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.925, Adjusted R-squared:  0.8845 
+F-statistic: 22.89 on 7 and 13 DF,  p-value: 2.414e-06
+
+
+$Italy
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-7.473 -2.801  0.000  2.608  7.936 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  98.4021     6.9722  14.114 2.92e-09 ***
+TED           9.0628     5.7581   1.574  0.13952    
+VIX          -0.1310     0.2551  -0.514  0.61602    
+SENT          0.1322     2.3800   0.056  0.95655    
+FEDFUNDS     -0.7436     1.0340  -0.719  0.48478    
+INTERNET     -2.2092     0.2305  -9.585 2.94e-07 ***
+ERM         -29.7137     5.7468  -5.171  0.00018 ***
+Euro          3.8576     5.6445   0.683  0.50634    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.153 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.9533,    Adjusted R-squared:  0.9281 
+F-statistic:  37.9 on 7 and 13 DF,  p-value: 1.181e-07
+
+
+$Japan
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-10.1945  -0.9873   0.0000   3.1306   5.9628 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  92.4517     6.8632  13.471 5.16e-09 ***
+TED          -9.3493     5.6680  -1.649  0.12299    
+VIX           0.3533     0.2511   1.407  0.18282    
+SENT         -2.0319     2.3428  -0.867  0.40151    
+FEDFUNDS      0.7525     1.0178   0.739  0.47284    
+INTERNET     -0.7435     0.2269  -3.277  0.00601 ** 
+ERM         -14.4532     5.6569  -2.555  0.02397 *  
+Euro         17.8303     5.5563   3.209  0.00685 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.073 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.7519,    Adjusted R-squared:  0.6183 
+F-statistic: 5.629 on 7 and 13 DF,  p-value: 0.003709
+
+
+$Netherlands
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-10.1221  -2.2324   0.2658   2.8823   8.0737 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  87.4767     7.5178  11.636 3.02e-08 ***
+TED           3.8116     6.2087   0.614 0.549866    
+VIX           0.1952     0.2750   0.710 0.490308    
+SENT         -1.0259     2.5662  -0.400 0.695820    
+FEDFUNDS      0.5990     1.1149   0.537 0.600137    
+INTERNET     -2.3704     0.2485  -9.538 3.11e-07 ***
+ERM         -31.5371     6.1965  -5.090 0.000208 ***
+Euro          6.1231     6.0863   1.006 0.332750    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.556 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.9575,    Adjusted R-squared:  0.9346 
+F-statistic: 41.85 on 7 and 13 DF,  p-value: 6.448e-08
+
+
+$`New Zealand`
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-13.9295  -3.4969   0.1829   3.6376  11.7301 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  96.7174    10.4705   9.237 4.48e-07 ***
+TED         -30.6786     8.6472  -3.548  0.00357 ** 
+VIX           0.2837     0.3830   0.741  0.47206    
+SENT         -1.7589     3.5742  -0.492  0.63084    
+FEDFUNDS      2.4017     1.5528   1.547  0.14593    
+INTERNET     -0.9840     0.3461  -2.843  0.01385 *  
+ERM         -18.2440     8.6302  -2.114  0.05441 .  
+Euro        -18.0265     8.4767  -2.127  0.05318 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.739 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.8874,    Adjusted R-squared:  0.8268 
+F-statistic: 14.63 on 7 and 13 DF,  p-value: 3.09e-05
+
+
+$`South Africa`
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-18.848  -1.136   1.136   3.751   5.872 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 106.2471     9.9619  10.665 8.48e-08 ***
+TED         -23.0808     8.2272  -2.805 0.014874 *  
+VIX           0.5523     0.3644   1.516 0.153565    
+SENT         -2.2426     3.4006  -0.659 0.521104    
+FEDFUNDS     -1.1138     1.4774  -0.754 0.464358    
+INTERNET     -1.7950     0.3293  -5.450 0.000111 ***
+ERM         -21.4381     8.2110  -2.611 0.021556 *  
+Euro        -15.0590     8.0650  -1.867 0.084582 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.363 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.9051,    Adjusted R-squared:  0.854 
+F-statistic: 17.72 on 7 and 13 DF,  p-value: 1.058e-05
+
+
+$`United Kingdom`
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.3064 -1.7057 -0.0197  1.9192  6.7161 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  92.7375     5.9929  15.475 9.39e-10 ***
+TED           4.8518     4.9493   0.980 0.344828    
+VIX          -0.1006     0.2192  -0.459 0.653915    
+SENT         -0.3171     2.0457  -0.155 0.879187    
+FEDFUNDS      0.4521     0.8888   0.509 0.619468    
+INTERNET     -2.2021     0.1981 -11.115 5.21e-08 ***
+ERM         -25.2592     4.9396  -5.114 0.000199 ***
+Euro          9.3210     4.8517   1.921 0.076910 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.429 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.9672,    Adjusted R-squared:  0.9495 
+F-statistic: 54.73 on 7 and 13 DF,  p-value: 1.229e-08
+
+
+$`United States`
+
+Call:
+lm(formula = form, data = data_ols, na.action = na.omit)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-7.201 -1.550  0.000  2.205  6.931 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 100.7119     5.8043  17.351 2.26e-10 ***
+TED           8.8405     4.7936   1.844   0.0881 .  
+VIX          -0.5110     0.2123  -2.406   0.0317 *  
+SENT          0.6228     1.9813   0.314   0.7583    
+FEDFUNDS     -0.1100     0.8608  -0.128   0.9003    
+INTERNET     -0.4262     0.1919  -2.221   0.0447 *  
+ERM           2.9253     4.7842   0.611   0.5514    
+Euro         -1.0960     4.6991  -0.233   0.8192    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.29 on 13 degrees of freedom
+  (6 observations deleted due to missingness)
+Multiple R-squared:  0.7567,    Adjusted R-squared:  0.6256 
+F-statistic: 5.775 on 7 and 13 DF,  p-value: 0.003313
