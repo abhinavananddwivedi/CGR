@@ -1,0 +1,613 @@
+﻿CGR REIT Panel Regressions Model Number 5
+#############################################################################################
+### Unbalanced REIT Panel Estimation Augmented Model #5 #####################################
+#############################################################################################
+
+## Model Number 5
+
+# Full
+Panel_REIT_model_5
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 17, T = 1-21, N = 229
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-37.0069  -7.7471   1.2900   7.5237  27.9634 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED           -33.906044   5.703804 -5.9445 1.193e-08 ***
+VIX             1.206680   0.224384  5.3777 2.065e-07 ***
+SENT            1.838687   1.109533  1.6572 0.0990294 .  
+FEDFUNDS        3.169634   0.706767  4.4847 1.221e-05 ***
+ERM            -9.240676   2.629284 -3.5145 0.0005432 ***
+Euro          -36.417137   6.065590 -6.0039 8.752e-09 ***
+Agg_Econ_Risk  -1.116848   0.336674 -3.3173 0.0010770 ** 
+Agg_Fin_Risk   -1.661021   0.611673 -2.7155 0.0071871 ** 
+Agg_Pol_Risk    0.030442   0.369184  0.0825 0.9343652    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    70836
+Residual Sum of Squares: 28350
+R-Squared:      0.59978
+Adj. R-Squared: 0.55049
+F-statistic: 33.8023 on 9 and 203 DF, p-value: < 2.22e-16
+# Pre 2000
+Panel_REIT_model_5_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 9, T = 5-10, N = 80
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-35.22596  -2.44987   0.68719   2.26392  14.30218 
+
+Coefficients:
+               Estimate Std. Error t value  Pr(>|t|)    
+TED            14.93689    9.17232  1.6285   0.10842    
+VIX            -0.27201    0.23675 -1.1489   0.25493    
+SENT            3.10365    1.16935  2.6542   0.01005 *  
+FEDFUNDS        0.37631    0.48393  0.7776   0.43971    
+ERM           -12.15212    2.43435 -4.9919 5.004e-06 ***
+Agg_Econ_Risk  -0.38438    0.23591 -1.6293   0.10823    
+Agg_Fin_Risk    0.21486    0.39785  0.5401   0.59106    
+Agg_Pol_Risk   -0.26545    0.22171 -1.1973   0.23568    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    4014.6
+Residual Sum of Squares: 2632.6
+R-Squared:      0.34424
+Adj. R-Squared: 0.17769
+F-statistic: 4.13388 on 8 and 63 DF, p-value: 0.00051618
+# Post 2000
+Panel_REIT_model_5_Post 
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 17, T = 1-11, N = 149
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-28.67004  -8.14016   0.23817   8.08106  25.72609 
+
+Coefficients:
+               Estimate Std. Error t value  Pr(>|t|)    
+TED           -30.35527    5.40810 -5.6129 1.237e-07 ***
+VIX             0.81307    0.21395  3.8004 0.0002253 ***
+SENT            8.57617    1.99495  4.2989 3.439e-05 ***
+FEDFUNDS       -1.41106    1.00403 -1.4054 0.1624073    
+Euro          -32.44452    6.12677 -5.2955 5.219e-07 ***
+Agg_Econ_Risk   1.33475    1.15538  1.1552 0.2502096    
+Agg_Fin_Risk   -2.17268    0.69051 -3.1465 0.0020695 ** 
+Agg_Pol_Risk   -0.13256    0.54857 -0.2416 0.8094581    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    46257
+Residual Sum of Squares: 16606
+R-Squared:      0.64101
+Adj. R-Squared: 0.57153
+F-statistic: 27.6765 on 8 and 124 DF, p-value: < 2.22e-16
+##
+
+## Model Number 5 with Equity_Liq and Int_Use
+
+# Full
+Panel_REIT_model_5_aug_int
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 16, T = 1-21, N = 210
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-37.86437  -6.48981   0.46343   5.92569  25.33192 
+
+Coefficients:
+                 Estimate Std. Error t value  Pr(>|t|)    
+TED            -21.488867   4.617635 -4.6537 6.242e-06 ***
+VIX              0.494141   0.202426  2.4411 0.0155944 *  
+SENT             0.584079   1.154975  0.5057 0.6136712    
+FEDFUNDS         0.243868   0.691807  0.3525 0.7248623    
+ERM            -13.248199   4.010491 -3.3034 0.0011490 ** 
+Euro           -20.216391   5.578576 -3.6239 0.0003758 ***
+Agg_Econ_Risk    0.606483   0.567567  1.0686 0.2866725    
+Agg_Fin_Risk    -2.097978   0.610871 -3.4344 0.0007346 ***
+Agg_Pol_Risk    -0.201568   0.351951 -0.5727 0.5675395    
+REIT_Liq         3.065418  11.715331  0.2617 0.7938789    
+Internet_Usage  -0.451336   0.098255 -4.5935 8.091e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    67340
+Residual Sum of Squares: 19661
+R-Squared:      0.70803
+Adj. R-Squared: 0.66655
+F-statistic: 40.3437 on 11 and 183 DF, p-value: < 2.22e-16
+# Pre 2000
+Panel_REIT_model_5_aug_int_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 9, T = 5-10, N = 75
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-34.51299  -1.68642   0.69404   2.74543  12.96125 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED             30.32567   13.61644  2.2271 0.0299756 *  
+VIX             -0.27119    0.24993 -1.0850 0.2825572    
+SENT             5.45947    1.46664  3.7224 0.0004595 ***
+FEDFUNDS        -0.50682    0.78424 -0.6463 0.5207534    
+ERM            -11.33478    3.51881 -3.2212 0.0021279 ** 
+Agg_Econ_Risk   -0.36399    0.22169 -1.6418 0.1062263    
+Agg_Fin_Risk    -0.42246    0.67010 -0.6304 0.5309712    
+Agg_Pol_Risk    -0.36503    0.26594 -1.3726 0.1753405    
+REIT_Liq        -8.02440   13.63268 -0.5886 0.5584864    
+Internet_Usage  -0.25531    0.13126 -1.9451 0.0567928 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    3901.6
+Residual Sum of Squares: 2506.7
+R-Squared:      0.35752
+Adj. R-Squared: 0.15101
+F-statistic: 3.11623 on 10 and 56 DF, p-value: 0.0031792
+# Post 2000
+Panel_REIT_model_5_aug_int_Post 
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 16, T = 1-11, N = 135
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-21.16786  -7.15284  -0.22447   7.03074  24.43285 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED            -19.69316   11.11367 -1.7720 0.0791928 .  
+VIX              0.22091    0.48025  0.4600 0.6464345    
+SENT             3.30933    4.74607  0.6973 0.4871139    
+FEDFUNDS        -1.76127    0.80417 -2.1902 0.0306422 *  
+Euro           -19.73534    9.89729 -1.9940 0.0486477 *  
+Agg_Econ_Risk    1.10791    1.07017  1.0353 0.3028368    
+Agg_Fin_Risk    -2.58707    0.72973 -3.5453 0.0005792 ***
+Agg_Pol_Risk    -0.78875    0.63804 -1.2362 0.2190413    
+REIT_Liq       -26.10440   25.95044 -1.0059 0.3166757    
+Internet_Usage  -0.70904    0.35593 -1.9921 0.0488611 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    42834
+Residual Sum of Squares: 12535
+R-Squared:      0.70737
+Adj. R-Squared: 0.64025
+F-statistic: 26.3479 on 10 and 109 DF, p-value: < 2.22e-16
+##
+
+## Model Number 5 with Equity_Liq and Dev_PC1
+
+# Full
+Panel_REIT_model_5_aug_devpc
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 13, T = 1-21, N = 182
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-38.40566  -6.85936   0.98333   7.25343  26.79378 
+
+Coefficients:
+               Estimate Std. Error t value  Pr(>|t|)    
+TED           -24.71129    5.84835 -4.2253  4.02e-05 ***
+VIX             0.55967    0.19455  2.8767 0.0045738 ** 
+SENT            1.46287    0.96965  1.5087 0.1333850    
+FEDFUNDS        1.29597    0.66905  1.9370 0.0545263 .  
+ERM           -10.31004    3.64072 -2.8319 0.0052305 ** 
+Euro          -22.35617    6.09148 -3.6701 0.0003312 ***
+Agg_Econ_Risk   0.03946    0.55439  0.0712 0.9433469    
+Agg_Fin_Risk   -1.88997    0.72079 -2.6221 0.0095945 ** 
+Agg_Pol_Risk   -0.30542    0.38463 -0.7941 0.4283441    
+REIT_Liq        3.88029   17.82181  0.2177 0.8279228    
+Dev_PC1        -4.04601    2.28809 -1.7683 0.0789428 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    54752
+Residual Sum of Squares: 20880
+R-Squared:      0.61863
+Adj. R-Squared: 0.56312
+F-statistic: 23.3 on 11 and 158 DF, p-value: < 2.22e-16
+# Pre 2000
+Panel_REIT_model_5_aug_devpc_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 8, T = 5-10, N = 65
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-28.68238  -2.09394   0.21017   3.21610  12.44469 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)   
+TED           -25.08805   12.13673 -2.0671 0.044255 * 
+VIX             0.16291    0.27689  0.5884 0.559109   
+SENT           -3.28696    4.51658 -0.7278 0.470373   
+FEDFUNDS        2.95051    0.89931  3.2809 0.001955 **
+ERM            -9.90674    4.08374 -2.4259 0.019163 * 
+Agg_Econ_Risk  -0.33408    0.19438 -1.7187 0.092254 . 
+Agg_Fin_Risk    0.99515    0.30215  3.2936 0.001885 **
+Agg_Pol_Risk   -0.31187    0.24856 -1.2547 0.215797   
+REIT_Liq       -5.08266   17.33181 -0.2933 0.770617   
+Dev_PC1         7.50944    3.93157  1.9100 0.062242 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    3392.8
+Residual Sum of Squares: 1991.9
+R-Squared:      0.4129
+Adj. R-Squared: 0.20054
+F-statistic: 3.30544 on 10 and 47 DF, p-value: 0.0025812
+# Post 2000
+Panel_REIT_model_5_aug_devpc_Post 
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Unbalanced Panel: n = 13, T = 1-11, N = 117
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-27.68193  -6.77635   0.61738   6.28175  25.84584 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)  
+TED           -27.10782   11.18188 -2.4243  0.01725 *
+VIX             0.65899    0.46127  1.4287  0.15642  
+SENT            6.15293    4.43490  1.3874  0.16860  
+FEDFUNDS       -1.08886    1.12470 -0.9681  0.33546  
+Euro          -17.32980    9.81536 -1.7656  0.08071 .
+Agg_Econ_Risk   2.75969    1.10362  2.5006  0.01413 *
+Agg_Fin_Risk   -1.83243    0.79336 -2.3097  0.02309 *
+Agg_Pol_Risk   -0.49480    0.74262 -0.6663  0.50686  
+REIT_Liq       -4.81260   30.42388 -0.1582  0.87465  
+Dev_PC1        -2.73272    2.21530 -1.2336  0.22044  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    36201
+Residual Sum of Squares: 11925
+R-Squared:      0.67059
+Adj. R-Squared: 0.5935
+F-statistic: 19.1361 on 10 and 94 DF, p-value: < 2.22e-16
+##
+#########################################################################################
+### Balanced REIT Panel Estimation Augmented Model #5 #################################
+#########################################################################################
+
+## Model Number 5
+
+# Full
+Bal_REIT_model_5
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 9, T = 15, N = 135
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-31.0918  -7.6801   0.1912   8.2937  26.2376 
+
+Coefficients:
+               Estimate Std. Error t value  Pr(>|t|)    
+TED           -33.11765    7.37679 -4.4894 1.672e-05 ***
+VIX             1.12234    0.26276  4.2714 3.953e-05 ***
+SENT            1.24169    1.01558  1.2226  0.223901    
+FEDFUNDS        3.04231    0.92794  3.2786  0.001371 ** 
+Euro          -37.90182    5.57081 -6.8036 4.481e-10 ***
+Agg_Econ_Risk  -0.52987    0.51376 -1.0314  0.304483    
+Agg_Fin_Risk   -2.08733    0.77077 -2.7081  0.007773 ** 
+Agg_Pol_Risk    0.43010    0.49482  0.8692  0.386497    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    52839
+Residual Sum of Squares: 18453
+R-Squared:      0.65078
+Adj. R-Squared: 0.60342
+F-statistic: 27.4865 on 8 and 118 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_REIT_model_5_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 9, T = 8, N = 72
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-31.19165  -2.55266   0.48067   2.48839  11.30140 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)   
+TED           14.679877   4.923506  2.9816 0.004239 **
+VIX           -0.837031   0.270649 -3.0927 0.003091 **
+SENT           2.452738   1.662588  1.4753 0.145745   
+FEDFUNDS      -2.375562   1.339038 -1.7741 0.081486 . 
+Agg_Econ_Risk  0.144180   0.162010  0.8899 0.377304   
+Agg_Fin_Risk  -0.565657   0.807274 -0.7007 0.486392   
+Agg_Pol_Risk  -0.033252   0.199100 -0.1670 0.867961   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    2724.7
+Residual Sum of Squares: 2322.1
+R-Squared:      0.14775
+Adj. R-Squared: -0.080532
+F-statistic: 1.38691 on 7 and 56 DF, p-value: 0.22901
+# Post 2000
+Bal_REIT_model_5_Post 
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 9, T = 7, N = 63
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-20.74701  -5.75019   0.24967   4.76082  28.08881 
+
+Coefficients:
+               Estimate Std. Error t value  Pr(>|t|)    
+TED           -92.08389   28.37935 -3.2448  0.002194 ** 
+VIX             4.52375    1.54415  2.9296  0.005267 ** 
+SENT          -43.84792   28.12164 -1.5592  0.125798    
+FEDFUNDS        7.98490    3.71455  2.1496  0.036878 *  
+Euro          -57.23515   11.05779 -5.1760 4.858e-06 ***
+Agg_Econ_Risk   2.35758    1.53244  1.5385  0.130789    
+Agg_Fin_Risk    0.46877    1.54507  0.3034  0.762955    
+Agg_Pol_Risk   -0.86306    0.97810 -0.8824  0.382156    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    15062
+Residual Sum of Squares: 5113.8
+R-Squared:      0.66049
+Adj. R-Squared: 0.54239
+F-statistic: 11.1859 on 8 and 46 DF, p-value: 1.2956e-08
+##
+
+## Model Number 5 with Equity_Liq and Int_Use
+
+# Full
+Bal_REIT_model_5_aug_int
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 7, T = 15, N = 105
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-21.81782  -6.68091  -0.31512   6.31707  25.97910 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED            -11.66524    8.70342 -1.3403 0.1835964    
+VIX             -0.17207    0.40670 -0.4231 0.6732634    
+SENT             2.86160    1.75423  1.6313 0.1064095    
+FEDFUNDS        -3.14314    1.63244 -1.9254 0.0574049 .  
+Euro           -22.68262    6.35998 -3.5665 0.0005879 ***
+Agg_Econ_Risk    1.35041    0.73314  1.8419 0.0688510 .  
+Agg_Fin_Risk    -1.97046    1.17240 -1.6807 0.0963663 .  
+Agg_Pol_Risk     0.14120    0.51132  0.2761 0.7830882    
+REIT_Liq         9.99149   37.73388  0.2648 0.7917917    
+Internet_Usage  -0.59031    0.14389 -4.1024 9.103e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    46800
+Residual Sum of Squares: 10133
+R-Squared:      0.78348
+Adj. R-Squared: 0.74411
+F-statistic: 31.843 on 10 and 88 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_REIT_model_5_aug_int_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 7, T = 8, N = 56
+
+Residuals:
+   Min. 1st Qu.  Median 3rd Qu.    Max. 
+-7.0641 -2.3167  0.1733  1.9925  7.7838 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED            25.847386   4.822687  5.3595 3.742e-06 ***
+VIX            -0.657312   0.254409 -2.5837 0.0135347 *  
+SENT            5.565025   1.915749  2.9049 0.0059582 ** 
+FEDFUNDS       -5.976190   1.416886 -4.2178 0.0001372 ***
+Agg_Econ_Risk   0.153797   0.213420  0.7206 0.4753286    
+Agg_Fin_Risk   -0.190727   0.482977 -0.3949 0.6950157    
+Agg_Pol_Risk    0.339717   0.161306  2.1060 0.0415240 *  
+REIT_Liq       18.131628  13.245162  1.3689 0.1786615    
+Internet_Usage -0.224178   0.097743 -2.2935 0.0271491 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    1244.6
+Residual Sum of Squares: 742.58
+R-Squared:      0.40338
+Adj. R-Squared: 0.17965
+F-statistic: 3.00493 on 9 and 40 DF, p-value: 0.0078308
+# Post 2000
+Bal_REIT_model_5_aug_int_Post 
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 7, T = 7, N = 49
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-12.77840  -4.88671  -0.28771   3.82465  16.23156 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED            -52.39492   41.21510 -1.2713   0.21280    
+VIX              2.71569    2.21878  1.2240   0.22991    
+SENT           -50.90009   42.38405 -1.2009   0.23859    
+FEDFUNDS         6.53309    6.26681  1.0425   0.30500    
+Euro           -25.42952   14.88592 -1.7083   0.09727 .  
+Agg_Econ_Risk    1.03655    0.92497  1.1206   0.27078    
+Agg_Fin_Risk     1.00390    1.26216  0.7954   0.43225    
+Agg_Pol_Risk    -1.22520    0.44613 -2.7463   0.00981 ** 
+REIT_Liq       -57.72015   66.40903 -0.8692   0.39123    
+Internet_Usage  -1.67048    0.25221 -6.6234 1.809e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    13700
+Residual Sum of Squares: 2025.3
+R-Squared:      0.85217
+Adj. R-Squared: 0.77825
+F-statistic: 18.4464 on 10 and 32 DF, p-value: 1.3851e-10
+##
+
+## Model Number 5 with Equity_Liq and Dev_PC1
+
+# Full
+Bal_REIT_model_5_aug_devpc
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 7, T = 15, N = 105
+
+Residuals:
+    Min.  1st Qu.   Median  3rd Qu.     Max. 
+-27.2526  -5.9948  -1.2546   7.8840  28.5523 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED           -18.252010   7.902537 -2.3096 0.0232490 *  
+VIX             0.258149   0.302090  0.8545 0.3951237    
+SENT            0.285638   1.587256  0.1800 0.8576001    
+FEDFUNDS        0.224545   1.063678  0.2111 0.8332953    
+Euro          -20.734128   5.964712 -3.4761 0.0007922 ***
+Agg_Econ_Risk   1.178867   0.802645  1.4687 0.1454724    
+Agg_Fin_Risk   -2.417791   0.772911 -3.1282 0.0023854 ** 
+Agg_Pol_Risk   -0.056825   0.505430 -0.1124 0.9107401    
+REIT_Liq       89.457520  44.091963  2.0289 0.0454923 *  
+Dev_PC1        -1.822123   1.083906 -1.6811 0.0962954 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    39894
+Residual Sum of Squares: 13577
+R-Squared:      0.65967
+Adj. R-Squared: 0.5978
+F-statistic: 17.0575 on 10 and 88 DF, p-value: < 2.22e-16
+# Pre 2000
+Bal_REIT_model_5_aug_devpc_Pre
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 7, T = 8, N = 56
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-27.53255  -2.97003   0.75476   3.55162   9.90223 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)   
+TED           10.38439    7.34011  1.4147 0.164881   
+VIX           -1.38284    0.45000 -3.0730 0.003806 **
+SENT          -2.51338    1.52438 -1.6488 0.107025   
+FEDFUNDS       2.04974    1.18840  1.7248 0.092287 . 
+Agg_Econ_Risk  0.15302    0.25477  0.6006 0.551469   
+Agg_Fin_Risk  -0.13540    0.86058 -0.1573 0.875775   
+Agg_Pol_Risk   0.15215    0.23904  0.6365 0.528073   
+REIT_Liq      12.39849   15.68682  0.7904 0.433969   
+Dev_PC1        7.05448    3.21288  2.1957 0.033975 * 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    2596.4
+Residual Sum of Squares: 1852
+R-Squared:      0.2867
+Adj. R-Squared: 0.019215
+F-statistic: 1.78639 on 9 and 40 DF, p-value: 0.10136
+# Post 2000
+Bal_REIT_model_5_aug_devpc_Post 
+Oneway (individual) effect Within Model
+
+Call:
+plm::plm(formula = form, data = data_matrix, model = mdl, index = ind)
+
+Balanced Panel: n = 7, T = 7, N = 49
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-19.32953  -6.94201  -0.57735   5.17183  27.01564 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(>|t|)    
+TED           -139.28837   27.22414 -5.1164 1.417e-05 ***
+VIX              7.36057    1.49219  4.9327 2.416e-05 ***
+SENT          -108.61440   41.42397 -2.6220  0.013270 *  
+FEDFUNDS        16.09396    4.51506  3.5645  0.001169 ** 
+Euro           -68.16688    8.90681 -7.6533 1.010e-08 ***
+Agg_Econ_Risk    3.71969    1.75306  2.1218  0.041689 *  
+Agg_Fin_Risk     0.28417    1.67677  0.1695  0.866491    
+Agg_Pol_Risk    -1.14000    1.04733 -1.0885  0.284511    
+REIT_Liq        51.20108   52.45361  0.9761  0.336326    
+Dev_PC1         -0.67779    3.40928 -0.1988  0.843671    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Total Sum of Squares:    13062
+Residual Sum of Squares: 4519.4
+R-Squared:      0.65402
+Adj. R-Squared: 0.48103
+F-statistic: 6.04903 on 10 and 32 DF, p-value: 4.2454e-05
+##
