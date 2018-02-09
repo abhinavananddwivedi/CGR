@@ -26,13 +26,13 @@ source(file_script_process, echo = F) # Post-processed data files
 # Model 5
 
 Bond_model_5 <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + ERM + Euro + 
-  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Bond_Liq
 
 Bond_model_5_pre <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + ERM + 
-  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Bond_Liq
 
 Bond_model_5_post <- LHS_div_b ~ TED + VIX + SENT + FEDFUNDS + Euro + 
-  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + Bond_Liq
 
 # Model 5 + Bond_Liq + Internet_Usage
 
@@ -87,7 +87,7 @@ year_bal_2 <- 2004:2010
 ## With developmental principal component
 
 data_bond_model_5 <- Panel_bond %>% 
-  dplyr::select(c(Country:FEDFUNDS, ERM:Euro, Agg_Fin_Risk:Agg_Pol_Risk)) %>% 
+  dplyr::select(c(Country:FEDFUNDS, ERM:Euro, Agg_Fin_Risk:Agg_Pol_Risk, Bond_Liq)) %>% 
   na.omit()
 
 data_bond_model_5_aug_int <- Panel_bond %>% 

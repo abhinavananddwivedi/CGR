@@ -26,13 +26,13 @@ source(file_script_process, echo = F) # Post-processed data files
 # Model 5
 
 REIT_model_5 <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + ERM + Euro + 
-  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + REIT_Liq
 
 REIT_model_5_pre <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + ERM + 
-  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + REIT_Liq
 
 REIT_model_5_post <- LHS_div_r ~ TED + VIX + SENT + FEDFUNDS + Euro + 
-  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk 
+  Agg_Econ_Risk + Agg_Fin_Risk + Agg_Pol_Risk + REIT_Liq
 
 # Model 5 + REIT_Liq + Internet_Usage
 
@@ -87,7 +87,7 @@ year_bal_2 <- 2004:2010
 ## With developmental principal component
 
 data_REIT_model_5 <- Panel_REIT %>% 
-  dplyr::select(c(Country:FEDFUNDS, ERM:Euro, Agg_Fin_Risk:Agg_Pol_Risk)) %>% 
+  dplyr::select(c(Country:FEDFUNDS, ERM:Euro, Agg_Fin_Risk:Agg_Pol_Risk, REIT_Liq)) %>% 
   na.omit()
 
 data_REIT_model_5_aug_int <- Panel_REIT %>% 
