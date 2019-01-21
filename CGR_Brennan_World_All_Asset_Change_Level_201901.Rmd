@@ -1,0 +1,51 @@
+---
+title: "Table 7 OLS Regressions: Change on change and level on lag regressions"
+geometry: margin = 1.5in
+linkcolor: blue
+output:
+  word_document: default
+  #pdf_document: default
+documentclass: article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rmarkdown)
+library(knitr)
+library(plm)
+library(lmtest)
+library(lubridate)
+
+source('CGR_Panel_Brennan_World_on_World.R')
+```
+
+```{r World_OLS_Change, echo=T, results='markup', comment=NA}
+
+###############################
+# All assets change on change #
+###############################
+
+lm_world_all_change # Diff of LHS regressed on diff of RHS
+
+### Special 12 all assets change on change ###
+
+res_sp_12_change
+
+
+```
+
+```{r World_OLS_Level_Lag, echo=T, results='markup', comment=NA}
+
+###########################
+# All assets level on lag #
+###########################
+
+lm_world_all_level_lag # Levels of LHS regressed on lags of RHS
+
+# Special 12 all assets level on lags
+
+res_sp_12_level_lag
+
+
+```

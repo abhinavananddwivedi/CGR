@@ -218,6 +218,7 @@ Form_world_all <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM +
 Form_special_12_all <- Diversification_Average_Special_12 ~ TED + VIX + SENT + FEDFUNDS + 
   INTERNET + ERM + Euro
 
+
 ## Linear Models for Brennan Regressions
 
 lm_est <- function(form, data_ols)
@@ -266,3 +267,104 @@ for (i in 1:length(name_special_12))
 }
 
 names(res_sp_12) <- name_special_12
+
+
+###############################################################################
+### Changes post 201901 #######################################################
+###############################################################################
+
+####################################
+### Change on change regressions ###
+####################################
+
+data_world_ols_all_change <- data_world_ols_all %>%
+  dplyr::select(-c(ERM, Euro)) %>% #ignore dummies
+  apply(., 2, diff) %>% #difference all columns
+  tibble::as_tibble()
+
+Form_world_all_change <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET
+
+lm_world_all_change <- lm_est(Form_world_all_change, data_world_ols_all_change)
+
+# Special 12 regressions
+
+Form_sp_12_change <- Diversification_Average_Special_12 ~ TED + VIX + SENT + FEDFUNDS + 
+  INTERNET 
+
+res_sp_12_change <- list()
+
+for (i in 1:length(name_special_12))
+{
+  temp_res_change <- data_special_12_all[which(data_special_12_all$Country == 
+                                                 name_special_12[i]), ] %>%
+    dplyr::select(-c(Country, Year, ERM, Euro)) %>%
+    apply(., 2, diff) %>%
+    tibble::as_tibble(.)
+  
+  lm_sp_12_change <- lm_est(Form_sp_12_change, temp_res_change)
+  
+  res_sp_12_change[[i]] <- lm_sp_12_change
+}
+
+names(res_sp_12_change) <- name_special_12
+
+################################
+### Level on lag regressions ###
+################################
+
+func_lag <- function(vec, lag_length = 1)
+{
+  # This function accepts a vector and a lag length
+  # and returns the lagged vector of the same length
+  # with NA appended at the end
+  len <- length(vec)
+  temp <- vec[lag_length+1:len]
+  
+  return(temp)
+}
+
+lag_columns_RHS <- data_world_ols_all %>%
+  dplyr::select(TED:INTERNET) %>% 
+  apply(., 2, func_lag) %>%
+  tibble::as_tibble(.)
+
+data_world_ols_all_level_lag <- lag_columns_RHS %>%
+  tibble::add_column(World_Avg_All = data_world_ols_all$World_Avg_All) %>%
+  dplyr::select(World_Avg_All, everything())
+
+Form_world_all_level_lag <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET
+
+lm_world_all_level_lag <- lm_est(Form_world_all_level_lag, 
+                                 data_world_ols_all_level_lag)
+
+# Special 12 regressions
+
+Form_sp_12_level_lag <- Div_Ind ~ TED + VIX + SENT + FEDFUNDS + INTERNET 
+
+res_sp_12_level_lag <- list()
+
+for (i in 1:length(name_special_12))
+{
+  columns_RHS_level_lag <- data_special_12_all[which(data_special_12_all$Country == 
+                                                 name_special_12[i]), ] %>%
+    dplyr::select(TED:INTERNET) %>%
+    apply(., 2, func_lag) %>%
+    tibble::as_tibble(.) 
+  
+  columns_LHS_level_lag <- data_special_12_all[which(data_special_12_all$Country == 
+                                                       name_special_12[i]), 
+                                               'Diversification_Average_Special_12'] %>%
+    tibble::as_tibble(.)
+  
+  temp_res_level_lag <- columns_RHS_level_lag %>%
+    tibble::add_column(Div_Ind = columns_LHS_level_lag$Diversification_Average_Special_12) %>%
+    dplyr::select(Div_Ind, everything()) 
+  
+  lm_sp_12_level_lag <- lm_est(Form_sp_12_level_lag, temp_res_level_lag)
+  
+  res_sp_12_level_lag[[i]] <- lm_sp_12_level_lag
+}
+
+names(res_sp_12_level_lag) <- name_special_12
+
+
