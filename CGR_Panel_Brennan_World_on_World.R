@@ -210,7 +210,8 @@ Form_dev <- Dev_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 Form_emerg <- Emerg_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 Form_front <- Front_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 
-Form_world_all <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
+Form_world_all <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET + 
+  ERM + Euro
 
 Form_special_12_all <- Diversification_Average_Special_12 ~ TED + VIX + SENT + 
   FEDFUNDS + 
@@ -403,7 +404,8 @@ lm_world_all_level_lag <- lm_est(Form_world_all_level_lag,
 
 # Special 12 regressions
 
-Form_sp_12_level_lag <- Div_Ind ~ TED + VIX + SENT + FEDFUNDS + INTERNET 
+Form_sp_12_level_lag <- Div_Ind ~ TED + VIX + SENT + FEDFUNDS + INTERNET +
+  ERM + Euro
 
 res_sp_12_level_lag <- list()
 
@@ -417,12 +419,16 @@ for (i in 1:length(name_special_12))
   
   columns_LHS_level_lag <- data_special_12_all[which(data_special_12_all$Country == 
                                                        name_special_12[i]), 
-                                               'Diversification_Average_Special_12'] %>%
+                                               c('Diversification_Average_Special_12',
+                                                 'ERM', 'Euro')] %>%
     tibble::as_tibble(.)
   
   temp_res_level_lag <- columns_RHS_level_lag %>%
     tibble::add_column(Div_Ind = 
-                         columns_LHS_level_lag$Diversification_Average_Special_12) %>%
+                         columns_LHS_level_lag$Diversification_Average_Special_12,
+                       ERM = columns_LHS_level_lag$ERM,
+                       Euro = columns_LHS_level_lag$Euro
+                       ) %>%
     dplyr::select(Div_Ind, everything()) 
   
   lm_sp_12_level_lag <- lm_est(Form_sp_12_level_lag, temp_res_level_lag)
