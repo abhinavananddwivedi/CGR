@@ -10,14 +10,6 @@ library(sandwich)
 
 ##################################################################################
 
-### Directory Management #########################################################
-
-#folder <- "July_2017"
-#folder <- "Data_July_2017"
-#file_path <- paste0(folder, "/")
-
-##################################################################################
-
 ## Parse and post process LHS and RHS data tidily ################################
 
 file_path_script_process <- "CGR_Panel_Reg_Add_201707_Post_Processing.R" # Post Process
@@ -52,7 +44,7 @@ name_country_REIT <- LHS_REIT %>%
                 `United Kingdom` = UK) %>%
   colnames(.)
 
-### Stratification into developed, emerging and frontier economies ##########################
+### Stratification into developed, emerging and frontier economies ###############
 
 index_eq_developing <- c(5,7,8,9,12,13,14,19,20,25,30,31,
                          35,37,38,39,42,45,46,48,49,50,51,
@@ -65,34 +57,39 @@ index_eq_frontier_SP <- c(1, 4, 5, 7, 9, 14, 15, 16, 19, 21, 25, 35, 37:43,
                           83, 84, 88:89)
 
 # Which countries are common to the developing and frontier list? 
-index_common_deving_front <- lubridate::intersect(index_eq_developing, index_eq_frontier_SP)
+index_common_deving_front <- lubridate::intersect(index_eq_developing, 
+                                                  index_eq_frontier_SP)
 
 # Emerging country definition
 # Which countries are developing but not in the common list? Classify as emerging
-index_eq_emerging <- lubridate::setdiff(index_eq_developing, index_common_deving_front)
+index_eq_emerging <- lubridate::setdiff(index_eq_developing, 
+                                        index_common_deving_front)
 
 # Which countries are frontier in S&P but not in developing list? 
-index_front_not_deving <- lubridate::setdiff(index_eq_frontier_SP, index_common_deving_front)
+index_front_not_deving <- lubridate::setdiff(index_eq_frontier_SP, 
+                                             index_common_deving_front)
 
 # Frontier country definition
-index_eq_frontier <- lubridate::union(index_common_deving_front, index_front_not_deving)
+index_eq_frontier <- lubridate::union(index_common_deving_front, 
+                                      index_front_not_deving)
 
 # Developing country definition
 index_eq_developing <- lubridate::union(index_eq_frontier, index_eq_emerging)
 
 # Developed country definition
-index_eq_developed <- lubridate::setdiff(1:length(name_country_equity), index_eq_developing)
+index_eq_developed <- lubridate::setdiff(1:length(name_country_equity), 
+                                         index_eq_developing)
 
 name_eq_emerging <- name_country_equity[index_eq_emerging]
 name_eq_frontier <- name_country_equity[index_eq_frontier]
 name_eq_developed <- name_country_equity[index_eq_developed]
 
-#### Special 12 Country Results ############################################################
+#### Special 12 Country Results #############################################
 
 index_special_12 <- c(2, 6, 10, 23, 24, 34, 36, 53, 54, 72, 85, 86)
 name_special_12 <- name_country_equity[index_special_12] 
 
-### Brennan Regressions Follow #############################################################
+### Brennan Regressions Follow ##############################################
 
 ## EQUITY
 # World Avg Diversification and World Factors
@@ -215,7 +212,8 @@ Form_front <- Front_Avg ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 
 Form_world_all <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET + ERM + Euro
 
-Form_special_12_all <- Diversification_Average_Special_12 ~ TED + VIX + SENT + FEDFUNDS + 
+Form_special_12_all <- Diversification_Average_Special_12 ~ TED + VIX + SENT + 
+  FEDFUNDS + 
   INTERNET + ERM + Euro
 
 
@@ -258,7 +256,8 @@ res_sp_12 <- list()
 
 for (i in 1:length(name_special_12))
 {
-  temp_res <- data_special_12_all[which(data_special_12_all$Country == name_special_12[i]), ] %>%
+  temp_res <- data_special_12_all[which(data_special_12_all$Country == 
+                                          name_special_12[i]), ] %>%
     dplyr::select(-c(Country, Year))
   
   lm_sp_12 <- lm_est(Form_special_12_all, temp_res)
@@ -273,23 +272,41 @@ names(res_sp_12) <- name_special_12
 ### Changes post 201901 #######################################################
 ###############################################################################
 
+func_diff <- function(vec)
+{
+  return(c(NA, diff(vec)))
+}
+
 ####################################
 ### Change on change regressions ###
 ####################################
 
-data_world_ols_all_change <- data_world_ols_all %>%
-  dplyr::select(-c(ERM, Euro)) %>% #ignore dummies
-  apply(., 2, diff) %>% #difference all columns
-  tibble::as_tibble()
+func_change_change <- function(data_frame)
+{
+  temp_col_change <- data_frame %>%
+    dplyr::select(-c(ERM, Euro)) %>% #ignore dummies
+    apply(., 2, func_diff) %>% #difference all columns
+    tibble::as_tibble()
+  
+  temp_col_return <- temp_col_change %>%
+    tibble::add_column(ERM = data_world_ols_all$ERM,
+                       Euro = data_world_ols_all$Euro)
+  
+  return(temp_col_return)
+}
 
-Form_world_all_change <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET
+data_world_ols_all_change <- func_change_change(data_world_ols_all)
 
-lm_world_all_change <- lm_est(Form_world_all_change, data_world_ols_all_change)
+Form_world_all_change <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + 
+  INTERNET + ERM + Euro
+
+lm_world_all_change <- lm_est(Form_world_all_change, 
+                              data_world_ols_all_change)
 
 # Special 12 regressions
 
-Form_sp_12_change <- Diversification_Average_Special_12 ~ TED + VIX + SENT + FEDFUNDS + 
-  INTERNET 
+Form_sp_12_change <- Diversification_Average_Special_12 ~ TED + VIX + 
+  SENT + FEDFUNDS + INTERNET + ERM + Euro
 
 res_sp_12_change <- list()
 
@@ -298,8 +315,13 @@ for (i in 1:length(name_special_12))
   temp_res_change <- data_special_12_all[which(data_special_12_all$Country == 
                                                  name_special_12[i]), ] %>%
     dplyr::select(-c(Country, Year, ERM, Euro)) %>%
-    apply(., 2, diff) %>%
+    apply(., 2, func_diff) %>%
     tibble::as_tibble(.)
+  
+  temp_res_change <- temp_res_change %>%
+    tibble::add_column(ERM = data_world_ols_all$ERM,
+                       Euro = data_world_ols_all$Euro
+                       )
   
   lm_sp_12_change <- lm_est(Form_sp_12_change, temp_res_change)
   
@@ -307,6 +329,37 @@ for (i in 1:length(name_special_12))
 }
 
 names(res_sp_12_change) <- name_special_12
+
+################################
+### Equity bonds reits #########
+################################
+
+# Equity Regressions
+
+# Data Matrices
+data_world_ols_eq_change_change <- func_change_change(data_world_ols_eq)
+data_dev_ols_eq_change_change <- func_change_change(data_dev_ols_eq)
+data_emerg_ols_eq_change_change <- func_change_change(data_emerg_ols_eq)
+data_front_ols_eq_change_change <- func_change_change(data_front_ols_eq)
+
+lm_world_ols_all_change_change <- lm_est(Form_world, 
+                                         data_world_ols_eq_change_change)
+lm_dev_ols_all_change_change <- lm_est(Form_dev, 
+                                         data_dev_ols_eq_change_change)
+lm_emerg_ols_all_change_change <- lm_est(Form_emerg, 
+                                         data_emerg_ols_eq_change_change)
+lm_front_ols_all_change_change <- lm_est(Form_front, 
+                                         data_front_ols_eq_change_change)
+
+# Bond Regressions
+
+data_world_ols_b_change_change <- func_change_change(data_world_ols_b)
+lm_world_ols_b_change_change <- lm_est(Form_world, data_world_ols_b)
+
+# REIT Regressions
+
+data_world_ols_r_change_change <- func_change_change(data_world_ols_r)
+lm_world_ols_r_change_change <- lm_est(Form_world, data_world_ols_r)
 
 ################################
 ### Level on lag regressions ###
@@ -323,16 +376,27 @@ func_lag <- function(vec, lag_length = 1)
   return(temp)
 }
 
-lag_columns_RHS <- data_world_ols_all %>%
-  dplyr::select(TED:INTERNET) %>% 
-  apply(., 2, func_lag) %>%
-  tibble::as_tibble(.)
+func_RHS_lag <- function(data_frame)
+{
+  temp_col_lag <- data_frame %>%
+    dplyr::select(TED:INTERNET) %>% 
+    apply(., 2, func_lag) %>%
+    tibble::as_tibble(.)
+  
+  temp_col_lag_return <- temp_col_lag %>%
+    tibble::add_column(ERM = data_world_ols_all$ERM,
+                       Euro = data_world_ols_all$Euro
+                       )
+  
+  return(temp_col_lag_return)
+}
 
-data_world_ols_all_level_lag <- lag_columns_RHS %>%
+data_world_ols_all_level_lag <- func_RHS_lag(data_world_ols_all) %>%
   tibble::add_column(World_Avg_All = data_world_ols_all$World_Avg_All) %>%
   dplyr::select(World_Avg_All, everything())
 
-Form_world_all_level_lag <- World_Avg_All ~ TED + VIX + SENT + FEDFUNDS + INTERNET
+Form_world_all_level_lag <- World_Avg_All ~ TED + VIX + SENT + 
+  FEDFUNDS + INTERNET + ERM + Euro
 
 lm_world_all_level_lag <- lm_est(Form_world_all_level_lag, 
                                  data_world_ols_all_level_lag)
@@ -357,7 +421,8 @@ for (i in 1:length(name_special_12))
     tibble::as_tibble(.)
   
   temp_res_level_lag <- columns_RHS_level_lag %>%
-    tibble::add_column(Div_Ind = columns_LHS_level_lag$Diversification_Average_Special_12) %>%
+    tibble::add_column(Div_Ind = 
+                         columns_LHS_level_lag$Diversification_Average_Special_12) %>%
     dplyr::select(Div_Ind, everything()) 
   
   lm_sp_12_level_lag <- lm_est(Form_sp_12_level_lag, temp_res_level_lag)
@@ -367,4 +432,238 @@ for (i in 1:length(name_special_12))
 
 names(res_sp_12_level_lag) <- name_special_12
 
+################################
+### Equity bonds reits #########
+################################
 
+# Equity Regressions
+
+# Data Matrices
+data_world_ols_eq_level_lag <- func_RHS_lag(data_world_ols_eq) %>% 
+  tibble::add_column(World_Avg = data_world_ols_eq$World_Avg) %>%
+  dplyr::select(World_Avg, everything())
+
+data_dev_ols_eq_level_lag <- func_RHS_lag(data_dev_ols_eq) %>% 
+  tibble::add_column(Dev_Avg = data_dev_ols_eq$Dev_Avg) %>%
+  dplyr::select(Dev_Avg, everything())
+
+data_emerg_ols_eq_level_lag <- func_RHS_lag(data_emerg_ols_eq) %>% 
+  tibble::add_column(Emerg_Avg = data_emerg_ols_eq$Emerg_Avg) %>%
+  dplyr::select(Emerg_Avg, everything())
+
+data_front_ols_eq_level_lag <- func_RHS_lag(data_front_ols_eq) %>% 
+  tibble::add_column(Front_Avg = data_front_ols_eq$Front_Avg) %>%
+  dplyr::select(Front_Avg, everything())
+
+lm_world_ols_eq_level_lag <- lm_est(Form_world, 
+                                         data_world_ols_eq_level_lag)
+lm_dev_ols_eq_level_lag <- lm_est(Form_dev, 
+                                       data_dev_ols_eq_level_lag)
+lm_emerg_ols_eq_level_lag <- lm_est(Form_emerg, 
+                                         data_emerg_ols_eq_level_lag)
+lm_front_ols_eq_level_lag <- lm_est(Form_front, 
+                                         data_front_ols_eq_level_lag)
+
+# Bond Regressions
+ 
+data_world_ols_b_level_lag <- func_RHS_lag(data_world_ols_b) %>% 
+  tibble::add_column(World_Avg = data_world_ols_b$World_Avg) %>%
+  dplyr::select(World_Avg, everything())
+
+lm_world_ols_b_level_lag <- lm_est(Form_world, data_world_ols_b_level_lag)
+
+# REIT Regressions
+
+data_world_ols_r_level_lag <- func_RHS_lag(data_world_ols_r) %>% 
+  tibble::add_column(World_Avg = data_world_ols_r$World_Avg) %>%
+  dplyr::select(World_Avg, everything())
+
+lm_world_ols_r_level_lag <- lm_est(Form_world, data_world_ols_r_level_lag)
+
+
+
+####################################
+### Level on change regressions ####
+####################################
+
+# Changes in common factors
+col_diff <- data_world_ols_all %>%
+    dplyr::select(TED:INTERNET) %>%
+    apply(., 2, func_diff) %>%
+    tibble::as_tibble(.)
+
+func_level_change <- function(data_frame)
+{
+  temp <- data_frame %>%
+    dplyr::select(-c(TED:INTERNET)) %>%
+    tibble::add_column(TED_diff = col_diff$TED,
+                       VIX_diff = col_diff$VIX,
+                       SENT_diff = col_diff$SENT,
+                       FEDFUNDS_diff = col_diff$FEDFUNDS,
+                       INTERNET_diff = col_diff$INTERNET
+                       )
+  
+  return(temp)
+}
+
+data_world_ols_all_level_change <- func_level_change(data_world_ols_all)
+
+Form_world_all_level_change <- World_Avg_All ~ TED_diff + VIX_diff + 
+  SENT_diff + FEDFUNDS_diff + INTERNET_diff + ERM + Euro
+
+lm_world_all_level_change <- lm_est(Form_world_all_level_change, 
+                                    data_world_ols_all_level_change)
+
+# Special 12 regressions
+
+Form_sp_12_level_change <- Diversification_Average_Special_12 ~ TED_diff + VIX_diff + 
+  SENT_diff + FEDFUNDS_diff + INTERNET_diff + ERM + Euro
+
+res_sp_12_level_change <- list()
+
+for (i in 1:length(name_special_12))
+{
+  temp_column <- data_special_12_all[which(data_special_12_all$Country == 
+                                                 name_special_12[i]), ] %>%
+    dplyr::select(-c(Country, Year))
+    
+  temp_res_level_change <- func_level_change(temp_column)
+  
+  lm_sp_12_level_change <- lm_est(Form_sp_12_level_change, temp_res_level_change)
+  
+  res_sp_12_level_change[[i]] <- lm_sp_12_level_change
+}
+
+names(res_sp_12_level_change) <- name_special_12
+
+##############################
+### For equity bonds reits ###
+##############################
+
+# Equity Regressions
+
+# Data Matrices
+data_world_ols_eq_level_change <- func_level_change(data_world_ols_eq)
+data_dev_ols_eq_level_change <- func_level_change(data_dev_ols_eq)
+data_emerg_ols_eq_level_change <- func_level_change(data_emerg_ols_eq)
+data_front_ols_eq_level_change <- func_level_change(data_front_ols_eq)
+
+# Regression Formulas
+Form_world_diff <- World_Avg ~ TED_diff + VIX_diff + 
+  SENT_diff + FEDFUNDS_diff + INTERNET_diff + ERM + Euro
+Form_dev_diff <- Dev_Avg ~ TED_diff + VIX_diff + 
+  SENT_diff + FEDFUNDS_diff + INTERNET_diff + ERM + Euro
+Form_emerg_diff <- Emerg_Avg ~ TED_diff + VIX_diff + 
+  SENT_diff + FEDFUNDS_diff + INTERNET_diff + ERM + Euro
+Form_front_diff <- Front_Avg ~ TED_diff + VIX_diff + 
+  SENT_diff + FEDFUNDS_diff + INTERNET_diff + ERM + Euro
+
+lm_world_eq_level_change <- lm_est(Form_world_diff, data_world_ols_eq_level_change)
+lm_dev_eq_level_change <- lm_est(Form_dev_diff, data_dev_ols_eq_level_change)
+lm_emerg_eq_level_change <- lm_est(Form_emerg_diff, data_emerg_ols_eq_level_change)
+lm_front_eq_level_change <- lm_est(Form_front_diff, data_front_ols_eq_level_change)
+
+# Bond Regressions
+data_world_ols_b_level_change <- func_level_change(data_world_ols_b)
+
+lm_world_b_level_change <- lm_est(Form_world_diff, data_world_ols_b_level_change)
+
+
+# REIT Regressions
+data_world_ols_r_level_change <- func_level_change(data_world_ols_r)
+
+lm_world_r_level_change <- lm_est(Form_world_diff, data_world_ols_r_level_change)
+
+##############################################
+### Level on level plus internet change ######
+##############################################
+
+# Changes in INTERNET
+INTERNET_diff <- data_world_ols_all %>%
+  dplyr::select(INTERNET) %>%
+  apply(., 2, func_diff) %>%
+  tibble::as_tibble(.)
+
+func_level_change_INT <- function(data_frame)
+{
+  temp <- data_frame %>%
+    dplyr::select(-c(INTERNET)) %>%
+    tibble::add_column(INTERNET_diff = INTERNET_diff$INTERNET)
+  
+  return(temp)
+}
+
+data_world_ols_all_level_change_INT <- func_level_change_INT(data_world_ols_all)
+
+Form_world_all_level_change_INT <- World_Avg_All ~ TED + VIX + 
+  SENT + FEDFUNDS + INTERNET_diff + ERM + Euro
+
+lm_world_all_level_change_INT <- lm_est(Form_world_all_level_change_INT, 
+                                    data_world_ols_all_level_change_INT)
+
+# Special 12 regressions
+
+Form_sp_12_level_change_INT <- Diversification_Average_Special_12 ~ TED + VIX + 
+  SENT + FEDFUNDS + INTERNET_diff + ERM + Euro
+
+res_sp_12_level_change_INT <- list()
+
+for (i in 1:length(name_special_12))
+{
+  temp_mat <- data_special_12_all[which(data_special_12_all$Country == 
+                                             name_special_12[i]), ] %>%
+    dplyr::select(-c(Country, Year))
+  
+  temp_res_level_change_INT <- func_level_change_INT(temp_mat)
+  
+  lm_sp_12_level_change_INT <- lm_est(Form_sp_12_level_change_INT, 
+                                      temp_res_level_change_INT)
+  
+  res_sp_12_level_change_INT[[i]] <- lm_sp_12_level_change_INT
+}
+
+names(res_sp_12_level_change_INT) <- name_special_12
+
+##############################
+### For equity bonds reits ###
+##############################
+
+# Equity Regressions
+
+# Data Matrices
+data_world_ols_eq_level_change_INT <- func_level_change_INT(data_world_ols_eq)
+data_dev_ols_eq_level_change_INT <- func_level_change_INT(data_dev_ols_eq)
+data_emerg_ols_eq_level_change_INT <- func_level_change_INT(data_emerg_ols_eq)
+data_front_ols_eq_level_change_INT <- func_level_change_INT(data_front_ols_eq)
+
+# Regression Formulas
+Form_world_INT_diff <- World_Avg ~ TED + VIX + 
+  SENT + FEDFUNDS + INTERNET_diff + ERM + Euro
+Form_dev_INT_diff <- Dev_Avg ~ TED + VIX + 
+  SENT + FEDFUNDS + INTERNET_diff + ERM + Euro
+Form_emerg_INT_diff <- Emerg_Avg ~ TED + VIX + 
+  SENT + FEDFUNDS + INTERNET_diff + ERM + Euro
+Form_front_INT_diff <- Front_Avg ~ TED + VIX + 
+  SENT + FEDFUNDS + INTERNET_diff + ERM + Euro
+
+lm_world_eq_level_change_INT <- lm_est(Form_world_INT_diff, 
+                                       data_world_ols_eq_level_change_INT)
+lm_dev_eq_level_change_INT <- lm_est(Form_dev_INT_diff, 
+                                     data_dev_ols_eq_level_change_INT)
+lm_emerg_eq_level_change_INT <- lm_est(Form_emerg_INT_diff, 
+                                       data_emerg_ols_eq_level_change_INT)
+lm_front_eq_level_change_INT <- lm_est(Form_front_INT_diff, 
+                                       data_front_ols_eq_level_change_INT)
+
+# Bond Regressions
+data_world_ols_b_level_change_INT <- func_level_change_INT(data_world_ols_b)
+
+lm_world_b_level_change_INT <- lm_est(Form_world_INT_diff, 
+                                      data_world_ols_b_level_change_INT)
+
+
+# REIT Regressions
+data_world_ols_r_level_change_INT <- func_level_change_INT(data_world_ols_r)
+
+lm_world_r_level_change_INT <- lm_est(Form_world_INT_diff, 
+                                  data_world_ols_r_level_change_INT)

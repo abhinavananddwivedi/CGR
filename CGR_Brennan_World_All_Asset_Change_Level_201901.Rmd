@@ -1,5 +1,5 @@
 ---
-title: "Table 7 OLS Regressions: Change on change and level on lag regressions"
+title: "Table 7 OLS Regressions"
 geometry: margin = 1.5in
 linkcolor: blue
 output:
@@ -20,32 +20,127 @@ library(lubridate)
 source('CGR_Panel_Brennan_World_on_World.R')
 ```
 
-```{r World_OLS_Change, echo=T, results='markup', comment=NA}
+```{r World_OLS_Level_Change_INT, echo=T, results='markup', comment=NA}
+
+##########################################################
+### All assets level on level plus changes in INTERNET ###
+##########################################################
+
+# Level of diversification index regressed on levels of RHS and diff of INTERNET
+lm_world_all_level_change_INT 
+
+#####################################################################
+### Special 12 all assets level on level plus changes in INTERNET ###
+#####################################################################
+
+res_sp_12_level_change_INT
+
+##############
+### Equity ###
+##############
+
+lm_world_eq_level_change_INT #all
+
+lm_dev_eq_level_change_INT #developing countries
+
+lm_emerg_eq_level_change_INT #emerging
+
+lm_front_eq_level_change_INT #frontier
+
+#############
+### Bonds ###
+#############
+
+lm_world_b_level_change_INT
+
+#############
+### REITs ###
+#############
+
+lm_world_r_level_change_INT
+
+```
+
+
+
+
+```{r World_OLS_Level_Change, echo=T, results='markup', comment=NA}
 
 ###############################
-# All assets change on change #
+# All assets level on change #
 ###############################
 
-lm_world_all_change # Diff of LHS regressed on diff of RHS
+lm_world_all_level_change # Level of diversification index regressed on diff of RHS
 
-### Special 12 all assets change on change ###
+#############################################
+### Special 12 all assets level on change ###
+#############################################
 
-res_sp_12_change
+res_sp_12_level_change
 
+##############
+### Equity ###
+##############
+
+lm_world_eq_level_change #all
+
+lm_dev_eq_level_change #developing countries
+
+lm_emerg_eq_level_change #emerging
+
+lm_front_eq_level_change #frontier
+
+#############
+### Bonds ###
+#############
+
+lm_world_b_level_change
+
+#############
+### REITs ###
+#############
+
+lm_world_r_level_change
 
 ```
 
 ```{r World_OLS_Level_Lag, echo=T, results='markup', comment=NA}
 
-###########################
-# All assets level on lag #
-###########################
+##########################################################
+### All assets level on RHS lag ##########################
+##########################################################
 
-lm_world_all_level_lag # Levels of LHS regressed on lags of RHS
+# Level of diversification index regressed on lags of RHS
+lm_world_all_level_lag
 
-# Special 12 all assets level on lags
+#####################################################################
+### Special 12 all assets level on RHS lag ##########################
+#####################################################################
 
 res_sp_12_level_lag
 
+##############
+### Equity ###
+##############
+
+lm_world_ols_eq_level_lag #all
+
+lm_dev_ols_eq_level_lag #developing countries
+
+lm_emerg_ols_eq_level_lag #emerging
+
+lm_front_ols_eq_level_lag #frontier
+
+#############
+### Bonds ###
+#############
+
+lm_world_ols_b_level_lag
+
+#############
+### REITs ###
+#############
+
+lm_world_ols_r_level_lag
 
 ```
